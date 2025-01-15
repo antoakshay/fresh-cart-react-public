@@ -1,0 +1,109 @@
+{
+  "fruits": [
+    {
+      "name": "Apple",
+      "price": 200,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Banana",
+      "price": 100,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Orange",
+      "price": 300,
+      "available": false,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Mango",
+      "price": 400,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Strawberry",
+      "price": 500,
+      "available": false,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Pineapple",
+      "price": 300,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Watermelon",
+      "price": 200,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Grapes",
+      "price": 300,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Blueberry",
+      "price": 600,
+      "available": false,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Kiwi",
+      "price": 400,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Peach",
+      "price": 300,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Papaya",
+      "price": 200,
+      "available": false,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Plum",
+      "price": 300,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Cherries",
+      "price": 600,
+      "available": false,
+      "totalPrice": 0,
+      "quantity": 0
+    },
+    {
+      "name": "Pomegranate",
+      "price": 400,
+      "available": true,
+      "totalPrice": 0,
+      "quantity": 0
+    }
+  ]
+}

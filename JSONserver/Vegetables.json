@@ -1,0 +1,19 @@
+{
+  "vegetables": [
+    { "name": "Carrot", "price_per_kg": 100, "available": true },
+    { "name": "Broccoli", "price_per_kg": 300, "available": false },
+    { "name": "Spinach", "price_per_kg": 200, "available": true },
+    { "name": "Tomato", "price_per_kg": 100, "available": true },
+    { "name": "Potato", "price_per_kg": 100, "available": true },
+    { "name": "Onion", "price_per_kg": 200, "available": true },
+    { "name": "Garlic", "price_per_kg": 300, "available": false },
+    { "name": "Cucumber", "price_per_kg": 200, "available": true },
+    { "name": "Cauliflower", "price_per_kg": 300, "available": true },
+    { "name": "Capsicum", "price_per_kg": 400, "available": false },
+    { "name": "Zucchini", "price_per_kg": 400, "available": true },
+    { "name": "Pumpkin", "price_per_kg": 200, "available": true },
+    { "name": "Eggplant", "price_per_kg": 200, "available": false },
+    { "name": "Okra", "price_per_kg": 300, "available": true },
+    { "name": "Lettuce", "price_per_kg": 200, "available": true }
+  ]
+}
