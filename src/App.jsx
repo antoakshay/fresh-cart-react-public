@@ -4,6 +4,7 @@ import { loader as FruitsLoader } from './features/Products/Fruits/Fruitslists';
 // import { loader as CartLoader } from './features/Cart/Cart';
 import { action as placeOrderAction } from './features/Order/OrderWIndow';
 import { loader as orderLoader } from './features/Order/OrderDetails';
+import {loader as searchResultLoader } from './features/SearchProducts/SearchedProducts'
 import Applayout from './ui/Applayout';
 import Error from './ui/Error';
 import Home from './ui/Home';
@@ -14,6 +15,8 @@ import Login from './ui/Login';
 import OrderWIndow from './features/Order/OrderWIndow';
 import OrderDetails from './features/Order/OrderDetails';
 import { useDispatch } from 'react-redux';
+import SearchedProducts from './features/SearchProducts/SearchedProducts';
+import { SearchContextProvider } from './SearchContextApi';
 
 const router = createBrowserRouter([
   {
@@ -53,12 +56,21 @@ const router = createBrowserRouter([
         path: '/order/confirmation',
         element: <OrderDetails />,
       },
+      {
+        path: '/searchedProducts',
+        element: <SearchedProducts />,
+        loader: searchResultLoader,
+      },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <SearchContextProvider>
+      <RouterProvider router={router} />
+    </SearchContextProvider>
+  );
 }
 
 export default App;

@@ -1,20 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-// import {  getCurrentQuantityById, updateItemQuantity } from '../../Cart/cartSlice';
-import UpdateItem from '../../Cart/UpdateItem';
-import { useEffect, useState } from 'react';
-import {
-  deleteProduct,
-  // getCurrentQuantityById,
-  updateItemQuantity,
-} from '../../Cart/cartSlice';
-import { getCartDetails } from '../../../services/apiGetCart';
+import { updateItemQuantity } from '../Cart/cartSlice';
+import UpdateItem from '../Cart/UpdateItem';
 
-function Fruititems({ fruit, cartData }) {
-  const { _id, name, price, soldOut, totalPrice, quantity } = fruit;
+function SearchItems({ product }) {
+  const { _id, name, price, soldOut, totalPrice, quantity } = product;
 
   const dispatch = useDispatch();
-
-  const cartLoadingState = useSelector((state) => state.cart.loading);
 
   // Looking if the product is already in the cart
   const itemInCart = useSelector((state) =>
@@ -38,7 +29,6 @@ function Fruititems({ fruit, cartData }) {
       }),
     );
   }
-
   async function handleDeleteProduct() {
     // console.log(id);
     dispatch(
@@ -50,7 +40,7 @@ function Fruititems({ fruit, cartData }) {
     <div className="flex-auto items-center justify-center py-6">
       <ul className="grid grid-cols-5 gap-4 border border-gray-400 p-4">
         <li className="break-words">{name}</li>
-        {!soldOut && <li className="break-words">{price} </li>}
+        {!soldOut && <li className="break-words">{price} $ </li>}
         <li className="break-words">
           {!soldOut ? 'Available' : 'Out of stock'}
         </li>
@@ -67,19 +57,13 @@ function Fruititems({ fruit, cartData }) {
         )}
         {itemInCart && (
           <>
-            {cartLoadingState ? (
-              'Loading'
-            ) : (
-              <>
-                <UpdateItem currentQuantity={productQuantity} id={_id} />
-                <button
-                  className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                  onClick={() => handleDeleteProduct()}
-                >
-                  Delete
-                </button>
-              </>
-            )}
+            <UpdateItem currentQuantity={productQuantity} id={_id} />
+            <button
+              className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+              onClick={() => handleDeleteProduct()}
+            >
+              Delete
+            </button>
           </>
         )}
       </ul>
@@ -87,4 +71,4 @@ function Fruititems({ fruit, cartData }) {
   );
 }
 
-export default Fruititems;
+export default SearchItems;

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import Searchbar from '../features/Products/Search/Searchbar';
 import Login from './Login';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 function Home() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -13,10 +13,11 @@ function Home() {
       navigate('/', { replace: true });
     }
   }, [isAuthenticated, navigate]);
-  
+
   if (!isAuthenticated) {
     return null;
   }
+
 
   return (
     <div className="flex min-h-screen items-center justify-center">

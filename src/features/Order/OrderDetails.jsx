@@ -17,14 +17,13 @@ function OrderDetails() {
       navigate('/', { replace: true });
     }
   }, [isAuthenticated, navigate]);
+  const loader = useLoaderData();
+  console.log(loader);
+  const dispatch = useDispatch();
 
   if (!isAuthenticated) {
     return null;
   }
-
-  const loader = useLoaderData();
-  console.log(loader);
-  const dispatch = useDispatch();
 
   function clearCartState() {
     dispatch(clearCart());

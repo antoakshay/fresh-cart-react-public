@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigation } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Header from './Header';
 import Footer from './Footer';
@@ -8,14 +8,14 @@ import { useDispatch } from 'react-redux';
 import CartBill from '../features/Cart/CartBill';
 
 function Applayout() {
+  const navigation = useNavigation();
 
-  // console.log(isCart);
   return (
-    <div >
+    <div>
       <Header />
-      <Outlet />
+      {navigation.state === 'loading' ? 'Loading...' : <Outlet />}
       {/* <Cartoverview/> */}
-      
+
       <Footer />
     </div>
   );
