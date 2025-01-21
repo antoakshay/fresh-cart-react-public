@@ -30,6 +30,10 @@ function Fruititems({ fruit, cartData }) {
     return item ? item.quantity : 0;
   });
 
+  const isSelected = useSelector((state) =>
+    state.cart.items.some((item) => item.product._id === _id),
+  );
+
   function handleAddToCart() {
     dispatch(
       updateItemQuantity({
@@ -50,7 +54,7 @@ function Fruititems({ fruit, cartData }) {
     <div className="flex-auto items-center justify-center py-6">
       <ul className="grid grid-cols-5 gap-4 border border-gray-400 p-4">
         <li className="break-words">{name}</li>
-        {!soldOut && <li className="break-words">{price} </li>}
+        {!soldOut && <li className="break-words">{price}$ </li>}
         <li className="break-words">
           {!soldOut ? 'Available' : 'Out of stock'}
         </li>
@@ -67,19 +71,13 @@ function Fruititems({ fruit, cartData }) {
         )}
         {itemInCart && (
           <>
-            {cartLoadingState ? (
-              'Loading'
-            ) : (
-              <>
-                <UpdateItem currentQuantity={productQuantity} id={_id} />
-                <button
-                  className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                  onClick={() => handleDeleteProduct()}
-                >
-                  Delete
-                </button>
-              </>
-            )}
+            <UpdateItem currentQuantity={productQuantity} id={_id} />
+            <button
+              className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+              onClick={() => handleDeleteProduct()}
+            >
+              Delete
+            </button>
           </>
         )}
       </ul>

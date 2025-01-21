@@ -6,6 +6,7 @@ import CartBill from './CartBill';
 import Login from '../../ui/Login';
 import { useEffect } from 'react';
 import { getCartDetails } from '../../features/Cart/cartSlice';
+import Spinner from '../../ui/Spinner';
 
 // export async function loader() {
 //   const cart = await getCartDetails();
@@ -45,7 +46,7 @@ function Cart() {
   }
 
   if(isCartLoading){
-    return <div>Loading...</div>
+    return <Spinner/>
   }
 
   return (

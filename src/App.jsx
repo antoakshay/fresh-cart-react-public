@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
-import { loader as FruitsLoader } from './features/Products/Fruits/Fruitslists';
+// import { loader as FruitsLoader } from './features/Products/Fruits/Fruitslists';
 // import { loader as CartLoader } from './features/Cart/Cart';
 import { action as placeOrderAction } from './features/Order/OrderWIndow';
 import { loader as orderLoader } from './features/Order/OrderDetails';
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/products/fruits',
-        loader: FruitsLoader,
+        // loader: FruitsLoader,
         element: <Fruitslists />,
       },
       {

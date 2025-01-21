@@ -6,11 +6,13 @@ import { useEffect } from 'react';
 import { logoutUser } from '../features/User/userSlice';
 import { persistor } from '../store.js';
 import { clearCart } from '../features/Cart/cartSlice.js';
+import { useSearchContext } from '../SearchContextApi.jsx';
 
 function Header() {
   // js reducer() used in cartSlice.js file to compute the total quantity/
   // const totalCartQuantity = useSelector(getTotalCartQuantity);
   // const isAdded = totalCartQuantity > 0;
+  const { query, setQuery } = useSearchContext();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,8 +30,9 @@ function Header() {
 
   async function handleLogOut() {
     dispatch(logoutUser());
-    dispatch(clearCart())
-    // clearPersistedData();
+    dispatch(clearCart());
+    sessionStorage.clear();
+    setQuery('');
   }
 
   return (

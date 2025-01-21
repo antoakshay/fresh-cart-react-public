@@ -1,7 +1,7 @@
-export async function findProducts(products) {
+export async function findProducts(products,page=1) {
   try {
     const response = await fetch(
-      'https://192.168.43.117:7000/api/v1/products/search?sort=name&limit=10&page=1',
+      `https://192.168.43.117:7000/api/v1/products/search?sort=name&limit=10&page=${page}`,
       {
         method: 'POST',
         credentials: 'include',

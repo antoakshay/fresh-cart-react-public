@@ -40,6 +40,8 @@ export const logoutUser = createAsyncThunk(
           credentials: 'include',
         },
       );
+
+      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);
@@ -94,7 +96,7 @@ const userSlice = createSlice({
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.isAuthenticated = false;
+        state.isAuthenticated = true;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -104,7 +106,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = "Something went wrong while logging out";
         state.isAuthenticated = true;
       });
   },
