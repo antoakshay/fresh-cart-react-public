@@ -19,7 +19,7 @@ function Applayout() {
   return (
     <div>
       <Header />
-      {navigation.state === 'loading' ? 'Loading...' : <Outlet />}
+      <Outlet />      
       {/* <Cartoverview/> */}
 
       <Footer />
