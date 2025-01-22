@@ -18,6 +18,7 @@ import OrderDetails from './features/Order/OrderDetails';
 import { useDispatch } from 'react-redux';
 import SearchedProducts from './features/SearchProducts/SearchedProducts';
 import { SearchContextProvider } from './SearchContextApi';
+import CustomProducts from './features/Products/CustomProductsPage/CustomProducts';
 
 const router = createBrowserRouter([
   {
@@ -39,9 +40,8 @@ const router = createBrowserRouter([
         loader: categoryLoader,
       },
       {
-        path: '/products/fruits',
-        // loader: FruitsLoader,
-        element: <Fruitslists />,
+        path: '/products/:id',
+        element: <CustomProducts />,
       },
       {
         path: '/cart',

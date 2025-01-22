@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItemQuantity } from '../Cart/cartSlice';
-import UpdateItem from '../Cart/UpdateItem';
+import { updateItemQuantity } from '../../Cart/cartSlice';
+import UpdateItem from '../../Cart/UpdateItem';
 
-function SearchItems({ product }) {
-  const { _id, name, price, soldOut, totalPrice, quantity } = product;
-
+function CustomProductItem({ product }) {
+  const { _id, name, price, soldOut } = product;
   const dispatch = useDispatch();
 
   // Looking if the product is already in the cart
@@ -40,7 +39,7 @@ function SearchItems({ product }) {
     <div className="flex-auto items-center justify-center py-6">
       <ul className="grid grid-cols-5 gap-4 border border-gray-400 p-4">
         <li className="break-words">{name}</li>
-        {!soldOut && <li className="break-words">{price} $ </li>}
+        {!soldOut && <li className="break-words">{price}$ </li>}
         <li className="break-words">
           {!soldOut ? 'Available' : 'Out of stock'}
         </li>
@@ -71,4 +70,4 @@ function SearchItems({ product }) {
   );
 }
 
-export default SearchItems;
+export default CustomProductItem;

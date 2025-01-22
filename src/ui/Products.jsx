@@ -1,8 +1,15 @@
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from 'react-router-dom';
 import Fruit from '../features/Products/Fruits/Fruit';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getCategoryName } from '../services/apiGetCategory';
+import CustomHeader from './CustomHeader';
+import Spinner from './Spinner';
 
 export async function loader() {
   const response = await getCategoryName();
@@ -12,8 +19,10 @@ export async function loader() {
 function Products() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
-  const category = useLoaderData();
-  console.log(category);
+  const categories = useLoaderData();
+  console.log(categories);
+
+
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -28,9 +37,18 @@ function Products() {
   return (
     <div className="">
       <div className="aspect-square flex-auto items-center justify-center rounded-lg border border-gray-200 bg-stone-200 p-4 shadow-md">
-        <Link to="/products/fruits">
+        {/* <Link to="/products/fruits">
           <Fruit />
-        </Link>
+        </Link> */}
+        <div className="grid grid-cols-3 gap-4">
+          {categories.map((category, index) => (
+            <>
+              <Link to={`/products/${category.category}`}>
+                <CustomHeader key={index} category={category.category} />
+              </Link>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );

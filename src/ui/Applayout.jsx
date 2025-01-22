@@ -19,7 +19,7 @@ function Applayout() {
   return (
     <div>
       <Header />
-      <Outlet />      
+      {navigation.state === 'loading' ? <Spinner /> : <Outlet />}
       {/* <Cartoverview/> */}
 
       <Footer />
