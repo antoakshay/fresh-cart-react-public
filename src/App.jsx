@@ -2,9 +2,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
 // import { loader as FruitsLoader } from './features/Products/Fruits/Fruitslists';
 // import { loader as CartLoader } from './features/Cart/Cart';
+import { loader as categoryLoader } from './ui/Products';
 import { action as placeOrderAction } from './features/Order/OrderWIndow';
 import { loader as orderLoader } from './features/Order/OrderDetails';
-import {loader as searchResultLoader } from './features/SearchProducts/SearchedProducts'
+import { loader as searchResultLoader } from './features/SearchProducts/SearchedProducts';
 import Applayout from './ui/Applayout';
 import Error from './ui/Error';
 import Home from './ui/Home';
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <Products />,
+        loader: categoryLoader,
       },
       {
         path: '/products/fruits',

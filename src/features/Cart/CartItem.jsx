@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import { updateItemQuantity } from './cartSlice';
 
 function CartItem({ item, finalBill }) {
-  console.log(item);
+  // console.log(item);
   const { /* _id, */ price, /* name, */ /* totalPrice, */ quantity } = item;
   let _id = item.product._id;
   // console.log(_id);
-  console.log(item.product.name);
+  // console.log(item.product.name);
   let name = item.product.name;
   let totalPrice = item.totalPriceInd;
 
@@ -18,7 +18,7 @@ function CartItem({ item, finalBill }) {
 
   // Selecting the productQuantity of the updated Item
   const productQuantity = useSelector((state) => {
-    console.log([...state.cart.items]);
+    // console.log([...state.cart.items]);
     // console.log(_id);
     const item = state.cart.items.find((item) => {
       // console.log(item.product._id);

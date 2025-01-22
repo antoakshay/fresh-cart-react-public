@@ -1,12 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Fruit from '../features/Products/Fruits/Fruit';
-import Login from './Login';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { getCategoryName } from '../services/apiGetCategory';
+
+export async function loader() {
+  const response = await getCategoryName();
+  return response;
+}
 
 function Products() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
+  const category = useLoaderData();
+  console.log(category);
 
   useEffect(() => {
     if (!isAuthenticated) {
