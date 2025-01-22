@@ -1,18 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import API_URL from '../../../apiUrl';
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch(
-        'https://192.168.43.117:7000/api/v1/users/login',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ email, password }),
-        },
-      );
+      const response = await fetch(`${API_URL}/api/v1/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
+      });
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);
@@ -32,14 +30,11 @@ export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
   async (thunkAPI) => {
     try {
-      const response = await fetch(
-        'https://192.168.43.117:7000/api/v1/users/logout',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-        },
-      );
+      const response = await fetch(`${API_URL}/api/v1/users/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
 
       console.log(response);
       if (!response.ok) {

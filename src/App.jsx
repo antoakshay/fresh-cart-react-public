@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       {
         path: '/searchedProducts',
         element: <SearchedProducts />,
-        loader: searchResultLoader,
+        // loader: searchResultLoader,
       },
     ],
   },

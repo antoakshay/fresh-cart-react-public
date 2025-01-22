@@ -1,19 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import API_URL from '../../../apiUrl';
 
 export const updateItemQuantity = createAsyncThunk(
   'cart/updateItemQuantity',
   async ({ productId, quantity }, thunkAPI) => {
     console.log(JSON.stringify({ productId: productId, quantity: quantity }));
     try {
-      const response = await fetch(
-        'https://192.168.43.117:7000/api/v1/cart/updateCart',
-        {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ productId: productId, quantity: quantity }),
-        },
-      );
+      const response = await fetch(`${API_URL}/api/v1/cart/updateCart`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ productId: productId, quantity: quantity }),
+      });
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);
@@ -32,14 +30,11 @@ export const getCartDetails = createAsyncThunk(
   'cart/getCartDetails',
   async (thunkAPI) => {
     try {
-      const response = await fetch(
-        'https://192.168.43.117:7000/api/v1/cart/getCartById',
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-        },
-      );
+      const response = await fetch(`${API_URL}/api/v1/cart/getCartById`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);
@@ -60,15 +55,12 @@ export const deleteProduct = createAsyncThunk(
   async ({ productId }, thunkAPI) => {
     console.trace(productId);
     try {
-      const response = await fetch(
-        'https://192.168.1.36:7000/api/v1/cart/removeProduct',
-        {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ productId: productId }),
-        },
-      );
+      const response = await fetch(`${API_URL}/api/v1/cart/removeProduct`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ productId: productId }),
+      });
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);

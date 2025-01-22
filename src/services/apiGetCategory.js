@@ -1,15 +1,14 @@
+import API_URL from "../../apiUrl";
+
 export async function getCategoryName() {
   try {
-    const response = await fetch(
-      'https://192.168.43.117:7000/api/v1/products/getCategory',
-      {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    const response = await fetch(`${API_URL}/api/v1/products/getCategory`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

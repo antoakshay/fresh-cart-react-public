@@ -1,6 +1,9 @@
+import API_URL from "../../apiUrl";
+
+
 export async function getFruits(page = 1) {
   const res = await fetch(
-    `https://192.168.43.117:7000/api/v1/products/category/vegetables?page=${page}&sort=name`,
+    `${API_URL}/api/v1/products/category/vegetables?page=${page}&sort=name`,
     {
       method: 'GET',
       credentials: 'include',
@@ -18,9 +21,9 @@ export async function getFruits(page = 1) {
   return data;
 }
 
-export async function getProductForId(page = 1,category) {
+export async function getProductForId(page = 1, category) {
   const res = await fetch(
-    `https://192.168.43.117:7000/api/v1/products/category/${category}?page=${page}&sort=name`,
+    `${API_URL}/api/v1/products/category/${category}?page=${page}&sort=name`,
     {
       method: 'GET',
       credentials: 'include',
@@ -39,17 +42,14 @@ export async function getProductForId(page = 1,category) {
 }
 
 export async function getProductCount(category) {
-  const res = await fetch(
-    `https://192.168.43.117:7000/api/v1/products/getProductCount`,
-    {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({ category: category }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const res = await fetch(`${API_URL}/api/v1/products/getProductCount`, {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ category: category }),
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+  });
 
   if (!res.ok) {
     throw Error('Failed to get the data 😶');

@@ -18,7 +18,7 @@ export async function loader() {
 }
 
 function SearchedProducts() {
-  const loaderData = useLoaderData();
+  // const loaderData = useLoaderData();
   // const { query } = useSearchContext();
   const query = JSON.parse(sessionStorage.getItem('search_product_query'));
 
@@ -80,7 +80,7 @@ function SearchedProducts() {
     return null;
   }
 
-  if (loaderData.length === 0) {
+  if (!query) {
     return (
       <div className="flex min-h-screen w-full items-center justify-center">
         Search For Something! From the HomePage
