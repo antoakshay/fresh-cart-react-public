@@ -15,7 +15,7 @@ function Login() {
     const email = form.email.value;
     const password = form.password.value;
 
-    dispatch(loginUser({ email: email, password: password }));
+    await dispatch(loginUser({ email: email, password: password }));
   }
 
   useEffect(() => {
@@ -43,10 +43,16 @@ function Login() {
             />
           </div>
           <div className="flex space-x-2">
-            <button type="submit" className="button">
+            <button
+              type="submit"
+              className="button rounded-full border border-gray-300 px-6 py-2 font-medium text-gray-700 transition duration-200 hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            >
               Login
             </button>
-            <button type="submit" className="button">
+            <button
+              type="submit"
+              className="button rounded-full border border-gray-300 px-6 py-2 font-medium text-gray-700 transition duration-200 hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            >
               Sign-up
             </button>
           </div>

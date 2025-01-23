@@ -9,7 +9,7 @@ function Searchbar() {
 
   const navigate = useNavigate();
 
-  // if (query.length > 3) setDisable(false);
+  
 
   async function handleSearch(event) {
     event.preventDefault();
@@ -35,14 +35,16 @@ function Searchbar() {
         onChange={(e) => setQuery(e.target.value)}
         className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button
-        type="submit"
-        className={`rounded-lg px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${disable ? 'cursor-not-allowed bg-gray-400' : 'bg-blue-500'}`}
-        style={{ height: '100%' }}
-        disabled={disable}
-      >
-        Search
-      </button>
+      {query.length > 3 ? (
+        <button
+          type="submit"
+          className={`rounded-lg px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${disable ? 'cursor-not-allowed bg-gray-400' : 'bg-blue-500'}`}
+          style={{ height: '100%' }}
+          // disabled={disable}
+        >
+          Search
+        </button>
+      ) : null}
     </form>
   );
 }
