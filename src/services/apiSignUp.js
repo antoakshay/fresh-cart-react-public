@@ -1,7 +1,11 @@
 import API_URL from '../../apiUrl';
+import validator from 'validator';
 
 export async function signUp(email) {
   try {
+    if (!validator.isEmail(email)) {
+      throw new Error('Invalid email address');
+    }
     const response = await fetch(`${API_URL}/api/v1/users/signup`, {
       method: 'POST',
       credentials: 'include',
@@ -11,16 +15,16 @@ export async function signUp(email) {
       body: JSON.stringify({ email: email }),
     });
     console.log(response);
-    if (!response.ok) {
-      // alert('No results found')
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+   if (!response.ok) {
+     const errorData = await response.json();
+     throw new Error(errorData.message);
+   }
     const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
     console.log('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -35,16 +39,16 @@ export async function otpVerifier(otp) {
       },
       body: JSON.stringify({ otp: otp }),
     });
-    console.log(response);
+    // console.log(await response.json());
     if (!response.ok) {
-      // alert('No results found')
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(errorData.message);
     }
     const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
     console.log('Error:', error);
-    return null;
+    throw error;
   }
 }

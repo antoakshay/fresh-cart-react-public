@@ -2,14 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { useSearchContext } from '../../SearchContextApi';
 import { useMutation } from '@tanstack/react-query';
 import { otpVerifier } from '../../services/apiSignUp';
+import { useEffect, useRef, useState } from 'react';
 
 function UserOtp() {
   const { loading, setLoading } = useSearchContext();
   const { signUpAuth, setSignUpAuth } = useSearchContext();
   const navigate = useNavigate();
+  const [inputOtp, setInputOtp] = useState(true);
+  const otpRef = useRef('');
 
   console.log(signUpAuth);
-
 
   const mutation = useMutation({
     mutationFn: async (otp) => {
@@ -19,29 +21,45 @@ function UserOtp() {
       navigate('/accountCreation', { replace: true });
     },
     onError: (error) => {
-      alert(error.message);
+      alert(error);
+      setInputOtp(false);
+      if (error.message === 'OTP expired. Please use the Sign-up again!') {
+        setSignUpAuth(false);
+        navigate('/signup', { replace: true });
+      }
+        console.log(error.message);
+      // alert(error.message);
     },
   });
+
+  function handleChange(event) {
+    otpRef.current = event.target.value;
+    setInputOtp(otpRef.current.length !== 7);
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const otp = form.otp.value;
-
     setLoading(true);
     try {
       const response = await mutation.mutateAsync(otp);
+      console.log(response);
       form.reset();
     } catch (err) {
-      alert(err);
-      //   console.log(err);
+      // alert(err);
+        console.log(err);
     } finally {
+      // setInputOtp(true);
       setLoading(false);
     }
   }
 
+  useEffect(() => {
     if (!signUpAuth) {
       return navigate('/');
     }
+  }, [navigate, signUpAuth]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -65,12 +83,13 @@ function UserOtp() {
               inputMode="numeric"
               pattern="[0-9]*"
               required
+              onChange={handleChange}
             />
           </div>
           <button
             type="submit"
-            className="mt-6 w-full rounded-md bg-blue-600 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            disabled={loading}
+            className="mt-6 w-full rounded-md bg-blue-600 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400"
+            disabled={inputOtp}
           >
             {mutation.isPending ? 'Submitting...' : 'Verify OTP'}
           </button>

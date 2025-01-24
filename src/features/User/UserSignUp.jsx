@@ -7,19 +7,19 @@ import { useNavigate } from 'react-router-dom';
 
 function UserSignUp() {
   const { loading, setLoading } = useSearchContext();
-  const {signUpAuth, setSignUpAuth} = useSearchContext();
+  const { signUpAuth, setSignUpAuth } = useSearchContext();
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (email) => {
-     return await signUp(email);
+      return await signUp(email);
     },
     onSuccess: () => {
       setSignUpAuth(true);
-      navigate('/otpVerification', {replace: true});
+      navigate('/otpVerification',{replace: true});
       //   console.log('Success', data);
     },
-    onError: () => {
-      alert('Something went wrong. Please try again');
+    onError: (error) => {
+      // alert('Something went wrong. Please try again');
       //   console.log('Error', error);
     },
   });
@@ -28,13 +28,14 @@ function UserSignUp() {
     const form = event.target;
     const email = form.email.value;
 
-    if (!validator.isEmail(email)) {
-      throw new Error('Invalid email address');
-    }
+    // if (!validator.isEmail(email)) {
+    //   throw new Error('Invalid email address');
+    // }
     setLoading(true);
     try {
       const response = await mutation.mutateAsync(email);
-      form.reset();
+      // if (!response) throw new Error('Something went wrong');
+      // form.reset();
     } catch (err) {
       alert(err);
       //   console.log(err);
