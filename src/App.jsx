@@ -19,6 +19,8 @@ import { useDispatch } from 'react-redux';
 import SearchedProducts from './features/SearchProducts/SearchedProducts';
 import { SearchContextProvider } from './SearchContextApi';
 import CustomProducts from './features/Products/CustomProductsPage/CustomProducts';
+import UserSignUp from './features/User/userSignUp';
+import UserOtp from './features/User/UserOtp';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Login />,
+      },
+      {
+        path: '/signUp',
+        element: <UserSignUp/>
+      },
+      {
+        path: '/otpVerification',
+        element: <UserOtp/>
       },
       {
         path: '/home',

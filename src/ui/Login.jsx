@@ -9,6 +9,10 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  function handleSignUp(){
+    navigate('/signup');
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -52,6 +56,7 @@ function Login() {
             <button
               type="submit"
               className="button rounded-full border border-gray-300 px-6 py-2 font-medium text-gray-700 transition duration-200 hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+              onClick={handleSignUp}
             >
               Sign-up
             </button>

@@ -17,7 +17,7 @@ function Applayout() {
   }
 
   return (
-    <div>
+    <div className="bg-gray-200">
       <Header />
       {navigation.state === 'loading' ? <Spinner /> : <Outlet />}
       {/* <Cartoverview/> */}
