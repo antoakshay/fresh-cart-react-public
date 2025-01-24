@@ -5,13 +5,19 @@ import { otpVerifier } from '../../services/apiSignUp';
 
 function UserOtp() {
   const { loading, setLoading } = useSearchContext();
+  const { signUpAuth, setSignUpAuth } = useSearchContext();
   const navigate = useNavigate();
+
+  console.log(signUpAuth);
+
 
   const mutation = useMutation({
     mutationFn: async (otp) => {
-      otpVerifier(otp);
+      return await otpVerifier(otp);
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      navigate('/accountCreation', { replace: true });
+    },
     onError: (error) => {
       alert(error.message);
     },
@@ -32,6 +38,11 @@ function UserOtp() {
       setLoading(false);
     }
   }
+
+    if (!signUpAuth) {
+      return navigate('/');
+    }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
@@ -43,28 +54,25 @@ function UserOtp() {
           email and enter the OTP below to verify your identity.
         </p>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="flex justify-between">
-            {/* OTP Inputs */}
-            {[...Array(7)].map((_, index) => (
-              <input
-                key={index}
-                type="text"
-                id="otp"
-                maxLength="1"
-                className="h-12 w-12 rounded-md border border-gray-300 text-center text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                placeholder="-"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                autoFocus={index === 0}
-              />
-            ))}
+          <div>
+            <input
+              type="text"
+              id="otp"
+              minLength="7"
+              maxLength="7"
+              className="w-full rounded-md border border-gray-300 px-4 py-3 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="Enter OTP"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              required
+            />
           </div>
           <button
             type="submit"
             className="mt-6 w-full rounded-md bg-blue-600 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             disabled={loading}
           >
-            {mutation.isPending ? 'Submitting..' : ' Verify OTP'}
+            {mutation.isPending ? 'Submitting...' : 'Verify OTP'}
           </button>
         </form>
       </div>

@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom';
 
 function UserSignUp() {
   const { loading, setLoading } = useSearchContext();
+  const {signUpAuth, setSignUpAuth} = useSearchContext();
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (email) => {
-      await signUp(email);
+     return await signUp(email);
     },
     onSuccess: () => {
+      setSignUpAuth(true);
       navigate('/otpVerification', {replace: true});
       //   console.log('Success', data);
     },

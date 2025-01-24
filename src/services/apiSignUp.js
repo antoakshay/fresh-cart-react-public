@@ -1,18 +1,15 @@
-import API_URL from "../../apiUrl";
+import API_URL from '../../apiUrl';
 
 export async function signUp(email) {
   try {
-    const response = await fetch(
-      `${API_URL}/api/v1/users/signup`,
-      {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email }),
+    const response = await fetch(`${API_URL}/api/v1/users/signup`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({ email: email }),
+    });
     console.log(response);
     if (!response.ok) {
       // alert('No results found')
@@ -28,6 +25,7 @@ export async function signUp(email) {
 }
 
 export async function otpVerifier(otp) {
+  console.log(otp);
   try {
     const response = await fetch(`${API_URL}/api/v1/users/verifyOtp`, {
       method: 'POST',

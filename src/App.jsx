@@ -21,6 +21,7 @@ import { SearchContextProvider } from './SearchContextApi';
 import CustomProducts from './features/Products/CustomProductsPage/CustomProducts';
 import UserSignUp from './features/User/userSignUp';
 import UserOtp from './features/User/UserOtp';
+import UserAccountCreation from './features/User/UserAccountCreation';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/otpVerification',
         element: <UserOtp/>
+      },
+      {
+        path: '/accountCreation',
+        element: <UserAccountCreation/>
       },
       {
         path: '/home',
