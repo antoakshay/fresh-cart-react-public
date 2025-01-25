@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import validator from "validator";
 import API_URL from '../../../apiUrl';
 
 export const loginUser = createAsyncThunk(
@@ -60,6 +61,15 @@ const userSlice = createSlice({
     error: null,
     isAuthenticated: false,
   },
+  reducers: {
+    newUser(state,action) {
+      state.user = action.payload.name;
+      state.isAuthenticated = true;
+      state.error = null;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -86,6 +96,7 @@ const userSlice = createSlice({
         state.error = action.payload.message;
         state.isAuthenticated = false;
         state.user = '';
+        alert(action.payload.message);
       });
     builder
       .addCase(logoutUser.pending, (state) => {
@@ -101,10 +112,12 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = "Something went wrong while logging out";
+        state.error = 'Something went wrong while logging out';
         state.isAuthenticated = true;
       });
   },
 });
+
+export const { newUser } = userSlice.actions;
 
 export default userSlice.reducer;

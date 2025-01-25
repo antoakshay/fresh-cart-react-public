@@ -61,6 +61,7 @@ function UserSignUp() {
         </label>
         <input
           type="email"
+          value="antolazarus7@gmail.com"
           id="email"
           name="email"
           placeholder="example@example.com"

@@ -15,10 +15,10 @@ export async function signUp(email) {
       body: JSON.stringify({ email: email }),
     });
     console.log(response);
-   if (!response.ok) {
-     const errorData = await response.json();
-     throw new Error(errorData.message);
-   }
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
     const data = await response.json();
     console.log(data);
     return data;
@@ -38,6 +38,35 @@ export async function otpVerifier(otp) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ otp: otp }),
+    });
+    // console.log(await response.json());
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log('Error:', error);
+    throw error;
+  }
+}
+
+export async function createAccount(name, password, passwordConfirm) {
+  console.log(name, password, passwordConfirm);
+  try {
+    const response = await fetch(`${API_URL}/api/v1/users/accountCreation`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        password: password,
+        passwordConfirm: passwordConfirm,
+      }),
     });
     // console.log(await response.json());
     if (!response.ok) {

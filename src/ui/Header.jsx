@@ -30,6 +30,8 @@ function Header() {
 
   async function handleLogOut() {
     dispatch(logoutUser());
+    clearPersistedData();
+    localStorage.removeItem('persist:user');
     dispatch(clearCart());
     sessionStorage.clear();
     setQuery('');

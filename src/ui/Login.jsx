@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { login } from '../services/apiLogin';
 import { loginUser } from '../features/User/userSlice';
+import validator from 'validator';
 
 function Login() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function handleSignUp(){
+  function handleSignUp() {
     navigate('/signup');
   }
 
@@ -18,6 +19,10 @@ function Login() {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    if (!validator.isEmail(email)) {
+      alert('Invalid email address');
+      return;
+    }
 
     await dispatch(loginUser({ email: email, password: password }));
   }

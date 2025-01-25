@@ -32,6 +32,7 @@ function UserOtp() {
     },
   });
 
+  // For making the inputOtp button disabled if the char is less than 7
   function handleChange(event) {
     otpRef.current = event.target.value;
     setInputOtp(otpRef.current.length !== 7);
