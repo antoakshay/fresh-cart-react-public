@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getCategoryName } from '../services/apiGetCategory';
 import CustomHeader from './CustomHeader';
 import Spinner from './Spinner';
+import { useSearchContext } from '../SearchContextApi';
 
 export async function loader() {
   const response = await getCategoryName();
@@ -21,9 +22,6 @@ function Products() {
   const navigate = useNavigate();
   const categories = useLoaderData();
   console.log(categories);
-
-
-
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/', { replace: true });

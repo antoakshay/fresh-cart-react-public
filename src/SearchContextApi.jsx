@@ -12,7 +12,9 @@ export function SearchContextProvider({ children }) {
     const savedAuth = localStorage.getItem('signUpAuth');
     return savedAuth ? JSON.parse(savedAuth) : false;
   });
+  const [pageQuery, setPageQuery] = useState(1);
 
+  // !! Setting the signUp Auth state in memory localstorage
   useEffect(() => {
     localStorage.setItem('signUpAuth', JSON.stringify(signUpAuth));
   }, [signUpAuth]);
@@ -26,6 +28,8 @@ export function SearchContextProvider({ children }) {
         setLoading,
         signUpAuth,
         setSignUpAuth,
+        pageQuery,
+        setPageQuery,
       }}
     >
       {children}

@@ -35,15 +35,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/signUp',
-        element: <UserSignUp/>
+        element: <UserSignUp />,
       },
       {
         path: '/otpVerification',
-        element: <UserOtp/>
+        element: <UserOtp />,
       },
       {
         path: '/accountCreation',
-        element: <UserAccountCreation/>
+        element: <UserAccountCreation />,
       },
       {
         path: '/home',
