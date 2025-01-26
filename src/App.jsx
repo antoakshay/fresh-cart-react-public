@@ -22,6 +22,7 @@ import CustomProducts from './features/Products/CustomProductsPage/CustomProduct
 import UserSignUp from './features/User/UserSignUp';
 import UserOtp from './features/User/UserOtp';
 import UserAccountCreation from './features/User/UserAccountCreation';
+import UserPage from './features/User/UserPage';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/home',
         element: <Home />,
+      },
+      {
+        path: '/user',
+        element: <UserPage />,
       },
       {
         path: '/products',

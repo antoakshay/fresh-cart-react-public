@@ -7,6 +7,7 @@ import { logoutUser } from '../features/User/userSlice';
 import { persistor } from '../store.js';
 import { clearCart } from '../features/Cart/cartSlice.js';
 import { useSearchContext } from '../SearchContextApi.jsx';
+import User from './User.jsx';
 
 function Header() {
   // js reducer() used in cartSlice.js file to compute the total quantity/
@@ -43,6 +44,13 @@ function Header() {
         Fresh Cart🍇
       </Link>
       <div className="flex items-center gap-4">
+        {isAuthenticated && (
+          <Link to="/user" className="tracking-widest">
+            <div className="ml-3">
+              <User />
+            </div>
+          </Link>
+        )}
         {isAuthenticated /*  && isAdded */ && <Cartoverview />}
         {isAuthenticated ? (
           <Link to="/products" className="text-sm">
