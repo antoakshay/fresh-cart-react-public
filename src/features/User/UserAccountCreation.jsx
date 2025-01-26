@@ -85,7 +85,7 @@ function UserAccountCreation() {
           </label>
           <input
             type="text"
-            value="anto"
+            // value="anto"
             id="name"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Enter your name"
@@ -101,7 +101,7 @@ function UserAccountCreation() {
           </label>
           <input
             type="password"
-            value="123456789"
+            // value="123456789"
             id="password"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Enter your password"
@@ -117,7 +117,7 @@ function UserAccountCreation() {
           </label>
           <input
             type="password"
-            value="123456789"
+            // value="123456789"
             id="passwordConfirm"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Confirm your password"

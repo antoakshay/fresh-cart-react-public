@@ -17,6 +17,7 @@ function CustomProducts() {
   const [totalPage, setTotalPage] = useState();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   function handlePageChange(data) {
     setPage(data.selected + 1);
@@ -24,35 +25,37 @@ function CustomProducts() {
 
   useEffect(() => {
     const getProductCountNumber = async () => {
-      try {
-        const response = await getProductCount(id);
-        console.log(response);
-        const productCount = response.data;
-        setTotalPage(Math.ceil(productCount / 10));
-      } catch (err) {
-        console.log(err);
+      if (isAuthenticated) {
+        try {
+          const response = await getProductCount(id);
+          console.log(response);
+          const productCount = response.data;
+          setTotalPage(Math.ceil(productCount / 10));
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
     getProductCountNumber();
-  }, [id]);
+  }, [id, isAuthenticated]);
 
   useEffect(() => {
     async function getProducts() {
-      try {
-        setLoading(true);
-        const response = await getProductForId(page, id);
-        console.log(response.data);
-        setProducts(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
+      if (isAuthenticated) {
+        try {
+          setLoading(true);
+          const response = await getProductForId(page, id);
+          console.log(response.data);
+          setProducts(response.data);
+          setLoading(false);
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
     getProducts();
-  }, [id, page]);
-
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  }, [id, isAuthenticated, page]);
 
   const navigate = useNavigate();
 

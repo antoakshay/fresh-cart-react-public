@@ -19,7 +19,7 @@ import { useDispatch } from 'react-redux';
 import SearchedProducts from './features/SearchProducts/SearchedProducts';
 import { SearchContextProvider } from './SearchContextApi';
 import CustomProducts from './features/Products/CustomProductsPage/CustomProducts';
-import UserSignUp from './features/User/userSignUp';
+import UserSignUp from './features/User/UserSignUp';
 import UserOtp from './features/User/UserOtp';
 import UserAccountCreation from './features/User/UserAccountCreation';
 

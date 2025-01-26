@@ -29,8 +29,6 @@ function Cart() {
 
   const isCartLoading = useSelector((state) => state.cart.loading);
 
-
-
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/', { replace: true });
@@ -38,15 +36,17 @@ function Cart() {
     }
   }, [isAuthenticated, navigate]);
   useEffect(() => {
-    dispatch(getCartDetails());
-  }, []);
+    if (isAuthenticated) {
+      dispatch(getCartDetails());
+    }
+  }, [dispatch,isAuthenticated]);
 
   if (!isAuthenticated) {
     return null;
   }
 
-  if(isCartLoading){
-    return <Spinner/>
+  if (isCartLoading) {
+    return <Spinner />;
   }
 
   return (
