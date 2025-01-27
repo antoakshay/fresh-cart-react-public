@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function UserPage() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -29,16 +29,17 @@ function UserPage() {
             <span className="font-medium text-gray-800">Name:</span> {name}
           </p>
           <p className="text-gray-600">
-            <span className="font-medium text-gray-800">Email:</span>{' '}
-            {email}
+            <span className="font-medium text-gray-800">Email:</span> {email}
           </p>
         </div>
         <button className="mb-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-center font-medium text-white hover:bg-blue-600">
           Your Order History
         </button>
-        <button className="w-full rounded-lg bg-green-500 px-4 py-2 text-center font-medium text-white hover:bg-green-600">
-          Update Password
-        </button>
+        <Link to="/updatePassword" className="tracking-widest">
+          <button className="w-full rounded-lg bg-green-500 px-4 py-2 text-center font-medium text-white hover:bg-green-600">
+            Update Password
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ import UserSignUp from './features/User/UserSignUp';
 import UserOtp from './features/User/UserOtp';
 import UserAccountCreation from './features/User/UserAccountCreation';
 import UserPage from './features/User/UserPage';
+import UserUpdatePassword from './features/User/UserUpdatePassword';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: '/user',
         element: <UserPage />,
+      },
+      {
+        path: '/updatePassword',
+        element: <UserUpdatePassword/>
       },
       {
         path: '/products',
