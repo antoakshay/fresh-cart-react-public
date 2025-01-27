@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 function UserPage() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const email = useSelector((state) => state.user.email);
+  const name = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,11 +26,11 @@ function UserPage() {
         </h1>
         <div className="mb-6 space-y-2">
           <p className="text-gray-600">
-            <span className="font-medium text-gray-800">Name:</span> John Doe
+            <span className="font-medium text-gray-800">Name:</span> {name}
           </p>
           <p className="text-gray-600">
             <span className="font-medium text-gray-800">Email:</span>{' '}
-            john.doe@example.com
+            {email}
           </p>
         </div>
         <button className="mb-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-center font-medium text-white hover:bg-blue-600">

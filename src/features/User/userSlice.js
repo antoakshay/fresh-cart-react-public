@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import validator from "validator";
+import validator from 'validator';
 import API_URL from '../../../apiUrl';
 
 export const loginUser = createAsyncThunk(
@@ -57,13 +57,16 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: '',
+    email: '',
     loading: false,
     error: null,
     isAuthenticated: false,
   },
   reducers: {
-    newUser(state,action) {
+    newUser(state, action) {
+      console.log(action.payload);
       state.user = action.payload.name;
+      state.email = action.payload.email;
       state.isAuthenticated = true;
       state.error = null;
       state.loading = false;
@@ -81,6 +84,7 @@ const userSlice = createSlice({
         console.log(action.payload);
         if (action.payload.data) {
           state.user = action.payload.data.name;
+          state.email = action.payload.data.email;
         } else {
           console.log('data not found in payload');
         }
