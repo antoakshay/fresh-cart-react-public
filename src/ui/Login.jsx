@@ -14,6 +14,10 @@ function Login() {
     navigate('/signup');
   }
 
+  function handleForgotPassword(){
+    navigate('/forgotpassword');
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -59,11 +63,18 @@ function Login() {
               Login
             </button>
             <button
-              type="submit"
+              type="button"
               className="button rounded-full border border-gray-300 px-6 py-2 font-medium text-gray-700 transition duration-200 hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
               onClick={handleSignUp}
             >
               Sign-up
+            </button>
+            <button
+              type="button"
+              className="button rounded-full border border-gray-300 px-6 py-2 font-medium text-gray-700 transition duration-200 hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+              onClick={handleForgotPassword}
+            >
+              Forgot Password?
             </button>
           </div>
         </form>

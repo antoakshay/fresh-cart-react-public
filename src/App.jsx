@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
 // import { loader as FruitsLoader } from './features/Products/Fruits/Fruitslists';
 // import { loader as CartLoader } from './features/Cart/Cart';
-import { loader as categoryLoader } from './ui/Products';
+// import { loader as categoryLoader } from './ui/Products';
 import { action as placeOrderAction } from './features/Order/OrderWIndow';
 import { loader as orderLoader } from './features/Order/OrderDetails';
 import { loader as searchResultLoader } from './features/SearchProducts/SearchedProducts';
@@ -24,6 +24,10 @@ import UserOtp from './features/User/UserOtp';
 import UserAccountCreation from './features/User/UserAccountCreation';
 import UserPage from './features/User/UserPage';
 import UserUpdatePassword from './features/User/UserUpdatePassword';
+import UserUpdatePasswordSuccess from './features/User/UserUpdatePasswordSuccess';
+import UserForgotPassword from './features/User/UserForgotPassword';
+import UserResetPassword from './features/User/UserResetPassword';
+import UserResetPassMessage from './features/User/UserResetPassMessage';
 
 const router = createBrowserRouter([
   {
@@ -57,12 +61,28 @@ const router = createBrowserRouter([
       },
       {
         path: '/updatePassword',
-        element: <UserUpdatePassword/>
+        element: <UserUpdatePassword />,
+      },
+      {
+        path: '/updatePassword/success',
+        element: <UserUpdatePasswordSuccess />,
+      },
+      {
+        path: '/forgotPassword',
+        element: <UserForgotPassword />,
+      },
+      {
+        path: 'resetPasswordMessage',
+        element: <UserResetPassMessage />,
+      },
+      {
+        path: '/resetPassword/:id',
+        element: <UserResetPassword />,
       },
       {
         path: '/products',
         element: <Products />,
-        loader: categoryLoader,
+        // loader: categoryLoader,
       },
       {
         path: '/products/:id',
