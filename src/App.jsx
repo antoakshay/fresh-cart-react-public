@@ -28,6 +28,8 @@ import UserUpdatePasswordSuccess from './features/User/UserUpdatePasswordSuccess
 import UserForgotPassword from './features/User/UserForgotPassword';
 import UserResetPassword from './features/User/UserResetPassword';
 import UserResetPassMessage from './features/User/UserResetPassMessage';
+import UserResetPassErrorMessage from './features/User/UserResetPassErrorMessage';
+import UserSetPassword from './features/User/UserSetPassword';
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,14 @@ const router = createBrowserRouter([
       {
         path: '/resetPassword/:id',
         element: <UserResetPassword />,
+      },
+      {
+        path: '/resetPassword/error',
+        element: <UserResetPassErrorMessage />,
+      },
+      {
+        path: '/resetPasswordSuccess/update',
+        element: <UserSetPassword />,
       },
       {
         path: '/products',

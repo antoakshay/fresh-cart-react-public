@@ -30,14 +30,47 @@ export async function resetPassword(email) {
 
 export async function resetPasswordUpdate(token) {
   try {
-    const response = await fetch(`${API_URL}/api/v1/users/resetPassword`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${API_URL}/api/v1/users/resetPasswordVerification`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: token }),
       },
-      body: JSON.stringify({ token: token }),
-    });
+    );
+    console.log(response);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log('Error:', error);
+    throw error;
+  }
+}
+
+export async function setResetPassword(password, passwordConfirm) {
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/users/resetPassword`,
+      {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: password,
+          passwordConfirm: passwordConfirm,
+        }),
+      },
+    );
     console.log(response);
     if (!response.ok) {
       const errorData = await response.json();

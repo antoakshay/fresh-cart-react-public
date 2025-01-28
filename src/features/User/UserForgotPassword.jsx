@@ -1,8 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { resetPassword } from '../../services/apiResetPassword';
 import { useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../../SearchContextApi';
+import Spinner from '../../ui/Spinner';
 
 function UserForgotPassword() {
+  const {loading,setLoading} = useSearchContext();
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (email) => {
@@ -26,10 +29,16 @@ function UserForgotPassword() {
     console.log(email);
 
     try {
+      setLoading(true);
       const response = await mutation.mutateAsync(email);
     } catch (e) {
       throw new Error(e.message);
+    } finally{
+      setLoading(false);
     }
+  }
+  if(loading){
+    return <Spinner/>
   }
 
   return (
@@ -50,6 +59,7 @@ function UserForgotPassword() {
               id="email"
               type="email"
               name="email"
+              value="antolazarus7@gmail.com"
               required
               className="mt-2 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
