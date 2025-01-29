@@ -81,3 +81,26 @@ export async function createAccount(name, password, passwordConfirm) {
     throw error;
   }
 }
+
+export async function getUser() {
+  try {
+    const response = await fetch(`${API_URL}/api/v1/users/getUserOntoken`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    // console.log(await response.json());
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log('Error:', error);
+    throw error;
+  }
+}

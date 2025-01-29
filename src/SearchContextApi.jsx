@@ -12,12 +12,23 @@ export function SearchContextProvider({ children }) {
     const savedAuth = localStorage.getItem('signUpAuth');
     return savedAuth ? JSON.parse(savedAuth) : false;
   });
+
+  // !! Setting the resetPass Auth state in memory localstorage
+  const [resetPassAuth, setResetPassAuth] = useState(() => {
+    const savedAuth = localStorage.getItem('resetPassAuth');
+    return savedAuth ? JSON.parse(savedAuth) : false;
+  });
   const [pageQuery, setPageQuery] = useState(1);
 
   // !! Setting the signUp Auth state in memory localstorage
   useEffect(() => {
     localStorage.setItem('signUpAuth', JSON.stringify(signUpAuth));
   }, [signUpAuth]);
+
+  // !! Setting the resetPass Auth state in memory localstorage
+  useEffect(() => {
+    localStorage.setItem('resetPassAuth', JSON.stringify(resetPassAuth));
+  }, [resetPassAuth]);
 
   return (
     <SearchContext.Provider
@@ -30,6 +41,8 @@ export function SearchContextProvider({ children }) {
         setSignUpAuth,
         pageQuery,
         setPageQuery,
+        resetPassAuth,
+        setResetPassAuth,
       }}
     >
       {children}

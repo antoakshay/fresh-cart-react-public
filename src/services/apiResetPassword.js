@@ -55,7 +55,8 @@ export async function resetPasswordUpdate(token) {
   }
 }
 
-export async function setResetPassword(password, passwordConfirm) {
+export async function setResetPassword({password, passwordConfirm}) {
+  console.log({password,passwordConfirm})
   try {
     const response = await fetch(
       `${API_URL}/api/v1/users/resetPassword`,

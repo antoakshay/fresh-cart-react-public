@@ -5,7 +5,8 @@ import { useSearchContext } from '../../SearchContextApi';
 import Spinner from '../../ui/Spinner';
 
 function UserForgotPassword() {
-  const {loading,setLoading} = useSearchContext();
+  const { loading, setLoading } = useSearchContext();
+  const { resetPassAuth, setResetPassAuth } = useSearchContext();
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (email) => {
@@ -13,7 +14,8 @@ function UserForgotPassword() {
     },
     onSuccess: (data) => {
       console.log('Success', data);
-      navigate('/resetPasswordMessage')
+      setResetPassAuth(true);
+      navigate('/resetPasswordMessage');
     },
     onError: (error) => {
       alert(error);
@@ -33,12 +35,12 @@ function UserForgotPassword() {
       const response = await mutation.mutateAsync(email);
     } catch (e) {
       throw new Error(e.message);
-    } finally{
+    } finally {
       setLoading(false);
     }
   }
-  if(loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
   }
 
   return (

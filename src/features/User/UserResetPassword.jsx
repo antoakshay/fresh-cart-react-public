@@ -15,7 +15,7 @@ function UserResetPassword() {
       return await resetPasswordUpdate(id);
     },
     onSuccess: (data) => {
-      navigate('/resetPasswordSuccess/update');
+      navigate('/resetPasswordSuccess/update', { replace: true });
       console.log('Success', data);
     },
     onError: (error) => {

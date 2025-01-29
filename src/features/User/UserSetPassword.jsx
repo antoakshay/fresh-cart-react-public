@@ -1,18 +1,22 @@
 import { useMutation } from '@tanstack/react-query';
 import { setResetPassword } from '../../services/apiResetPassword';
 import { useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../../SearchContextApi';
+import Spinner from '../../ui/Spinner';
 
 function UserSetPassword() {
   const navigate = useNavigate();
+  const { resetPassAuth, setResetPassAuth } = useSearchContext();
 
   const mutation = useMutation({
     mutationFn: async ({ password, passwordConfirm }) => {
-      console.log(password, passwordConfirm);
-      return await setResetPassword(password, passwordConfirm);
+      console.log({ password, passwordConfirm });
+      return await setResetPassword({ password, passwordConfirm });
     },
     onSuccess: (data) => {
       console.log('Success', data);
-      navigate('/updatePassword/success');
+      setResetPassAuth(false);
+      navigate('/updatePassword/success', { replace: true });
       // navigate('/home', { replace: true });
     },
     onError: (error) => {
@@ -21,6 +25,10 @@ function UserSetPassword() {
       //   console.log('Error', error);
     },
   });
+
+  if (mutation.isPending) {
+    return <Spinner />;
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -31,7 +39,10 @@ function UserSetPassword() {
       return alert('Passwords do not match');
     }
     try {
-      const response = await mutation.mutateAsync(password, passwordConfirm);
+      const response = await mutation.mutateAsync({
+        password,
+        passwordConfirm,
+      });
     } catch (error) {
       throw new Error(error);
     }

@@ -110,6 +110,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.loading = false;
+        state.email = '';
         state.isAuthenticated = false;
         state.user = '';
         state.error = null;
