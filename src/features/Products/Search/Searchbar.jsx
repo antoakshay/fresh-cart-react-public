@@ -9,8 +9,6 @@ function Searchbar() {
 
   const navigate = useNavigate();
 
-  
-
   async function handleSearch(event) {
     event.preventDefault();
     if (!query) return alert('Do I look like a mind reader? TYPE SOMETHING!');
