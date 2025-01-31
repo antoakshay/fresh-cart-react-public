@@ -88,9 +88,9 @@ function SearchedProducts() {
     );
   }
 
-  if (isCartLoading) {
+/*   if (isCartLoading) {
     return <Spinner />;
-  }
+  } */
 
   if (loading) {
     return <Spinner />;

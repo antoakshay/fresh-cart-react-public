@@ -5,7 +5,7 @@ import { useSearchContext } from '../../../SearchContextApi';
 
 function Searchbar() {
   const { query, setQuery } = useSearchContext();
-  const [disable, setDisable] = useState(true);
+  const [disable, setDisable] = useState(false);
 
   const navigate = useNavigate();
 

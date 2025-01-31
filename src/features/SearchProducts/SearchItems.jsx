@@ -1,9 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateItemQuantity } from '../Cart/cartSlice';
 import UpdateItem from '../Cart/UpdateItem';
+import { useSearchContext } from '../../SearchContextApi';
+import { Button } from '@mui/material';
+import { useState } from 'react';
+import Loader from '../../ui/Loading';
 
 function SearchItems({ product }) {
   const { _id, name, price, soldOut, totalPrice, quantity } = product;
+  const { updateQtyLoading } = useSearchContext();
+  const [deleteLoading, setDeleteLoading] = useState();
+  const [loading, setLoading] = useState();
 
   const dispatch = useDispatch();
 
@@ -22,18 +29,32 @@ function SearchItems({ product }) {
   });
 
   async function handleAddToCart() {
-   await dispatch(
-      updateItemQuantity({
-        productId: _id,
-        quantity: 1,
-      }),
-    );
+    try {
+      setLoading(true);
+      await dispatch(
+        updateItemQuantity({
+          productId: _id,
+          quantity: 1,
+        }),
+      );
+    } catch (err) {
+      alert('Something went wrong while adding the product to cart');
+    } finally {
+      setLoading(false);
+    }
   }
   async function handleDeleteProduct() {
-    // console.log(id);
-    await dispatch(
-      updateItemQuantity({ productId: _id, quantity: -productQuantity }),
-    );
+    try {
+      // console.log(id);
+      setDeleteLoading(true);
+      await dispatch(
+        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+      );
+    } catch (err) {
+      alert('Something went wrong while deleting the product');
+    } finally {
+      setDeleteLoading(false);
+    }
   }
 
   return (
@@ -50,7 +71,7 @@ function SearchItems({ product }) {
               onClick={handleAddToCart}
               className="rounded-md bg-lime-500 px-3 py-1 text-white"
             >
-              Add to Cart
+              {loading ? <Loader /> : 'Add to Cart'}
             </button>
             <div>{itemInCart ? `Quantity: ${productQuantity}` : null}</div>
           </>
@@ -58,12 +79,13 @@ function SearchItems({ product }) {
         {itemInCart && (
           <>
             <UpdateItem currentQuantity={productQuantity} id={_id} />
-            <button
+            <Button
               className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               onClick={() => handleDeleteProduct()}
+              disabled={updateQtyLoading}
             >
-              Delete
-            </button>
+              {deleteLoading ? <Loader /> : 'Delete'}
+            </Button>
           </>
         )}
       </ul>
