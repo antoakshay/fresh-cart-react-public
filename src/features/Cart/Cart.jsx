@@ -45,9 +45,9 @@ function Cart() {
     return null;
   }
 
-  if (isCartLoading) {
-    return <Spinner />;
-  }
+  // if (isCartLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div className="min-h-screen flex-auto items-center justify-center">

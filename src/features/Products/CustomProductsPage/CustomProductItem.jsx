@@ -1,10 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateItemQuantity } from '../../Cart/cartSlice';
 import UpdateItem from '../../Cart/UpdateItem';
+import { useState } from 'react';
+import Spinner from '../../../ui/Spinner';
+import Loader from '../../../ui/Loading';
+import { useSearchContext } from '../../../SearchContextApi';
+import { Button } from '@mui/material';
+
 
 function CustomProductItem({ product }) {
   const { _id, name, price, soldOut } = product;
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState();
+  const [deleteLoading, setDeleteLoading] = useState();
+  const { updateQtyLoading } = useSearchContext();
 
   // Looking if the product is already in the cart
   const itemInCart = useSelector((state) =>
@@ -21,18 +30,32 @@ function CustomProductItem({ product }) {
   });
 
   async function handleAddToCart() {
-   await dispatch(
-      updateItemQuantity({
-        productId: _id,
-        quantity: 1,
-      }),
-    );
+    try {
+      setLoading(true);
+      await dispatch(
+        updateItemQuantity({
+          productId: _id,
+          quantity: 1,
+        }),
+      );
+    } catch {
+      alert('Error updating quantity');
+    } finally {
+      setLoading(false);
+    }
   }
   async function handleDeleteProduct() {
     // console.log(id);
-    await dispatch(
-      updateItemQuantity({ productId: _id, quantity: -productQuantity }),
-    );
+    try {
+      setDeleteLoading(true);
+      await dispatch(
+        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+      );
+    } catch (e) {
+      alert('Error deleting product');
+    } finally {
+      setDeleteLoading(false);
+    }
   }
 
   return (
@@ -49,20 +72,23 @@ function CustomProductItem({ product }) {
               onClick={handleAddToCart}
               className="rounded-md bg-lime-500 px-3 py-1 text-white"
             >
-              Add to Cart
+              {loading ? <Loader /> : 'Add to Cart'}
             </button>
             <div>{itemInCart ? `Quantity: ${productQuantity}` : null}</div>
           </>
         )}
         {itemInCart && (
           <>
-            <UpdateItem currentQuantity={productQuantity} id={_id} />
-            <button
+            {deleteLoading ? null : (
+              <UpdateItem currentQuantity={productQuantity} id={_id} />
+            )}
+            <Button
               className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               onClick={() => handleDeleteProduct()}
+              disabled={updateQtyLoading}
             >
-              Delete
-            </button>
+              {deleteLoading ? <Loader /> : 'Delete'}
+            </Button>
           </>
         )}
       </ul>

@@ -2,8 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { getCurrentQuantityById, getTotalCartPrice } from './cartSlice';
 import CartBill from './CartBill';
 import UpdateItem from './UpdateItem';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { updateItemQuantity } from './cartSlice';
+import Loader from '../../ui/Loading';
+import { Button } from '@mui/material';
+import { useSearchContext } from '../../SearchContextApi';
 
 function CartItem({ item, finalBill }) {
   // console.log(item);
@@ -13,6 +16,9 @@ function CartItem({ item, finalBill }) {
   // console.log(item.product.name);
   let name = item.product.name;
   let totalPrice = item.totalPriceInd;
+
+  const { updateQtyLoading } = useSearchContext();
+  const [deleteLoading, setDeleteLoading] = useState();
 
   const dispatch = useDispatch();
 
@@ -29,10 +35,16 @@ function CartItem({ item, finalBill }) {
   });
 
   async function handleDeleteProduct() {
-    // console.log(id);
-    dispatch(
-      updateItemQuantity({ productId: _id, quantity: -productQuantity }),
-    );
+    try {
+      setDeleteLoading(true);
+      await dispatch(
+        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+      );
+    } catch (err) {
+      alert('Something went wrong while deleting the product');
+    } finally {
+      setDeleteLoading(false);
+    }
   }
 
   return (
@@ -47,12 +59,13 @@ function CartItem({ item, finalBill }) {
           {productQuantity > 0 && (
             <>
               <UpdateItem currentQuantity={productQuantity} id={_id} />
-              <button
+              <Button
+                className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
                 onClick={() => handleDeleteProduct()}
-                className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                disabled={updateQtyLoading}
               >
-                Delete
-              </button>
+                {deleteLoading ? <Loader /> : 'Delete'}
+              </Button>
             </>
           )}
         </li>

@@ -78,9 +78,9 @@ function CustomProducts() {
     return <Spinner />;
   }
 
-  if (isCartLoading) {
+ /*  if (isCartLoading) {
     return <Spinner />;
-  }
+  } */
 
   return (
     <div className="flex min-h-screen w-full flex-col justify-between">
