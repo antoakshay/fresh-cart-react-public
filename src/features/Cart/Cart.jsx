@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 // import { getCart, getTotalCartPrice } from './cartSlice';
 import CartBill from './CartBill';
 import Login from '../../ui/Login';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCartDetails } from '../../features/Cart/cartSlice';
 import Spinner from '../../ui/Spinner';
 
@@ -19,6 +19,7 @@ function Cart() {
   // }, [cart]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState();
   const userState = useSelector((state) => state.user);
 
   // console.log(result);
@@ -36,18 +37,28 @@ function Cart() {
     }
   }, [isAuthenticated, navigate]);
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(getCartDetails());
+    async function cartDetails() {
+      if (isAuthenticated) {
+        try {
+          setLoading(true);
+          await dispatch(getCartDetails());
+        } catch (err) {
+          alert('Something Went please try again later');
+        } finally {
+          setLoading(false);
+        }
+      }
     }
-  }, [dispatch,isAuthenticated]);
+    cartDetails();
+  }, [dispatch, isAuthenticated]);
 
   if (!isAuthenticated) {
     return null;
   }
 
-  // if (isCartLoading) {
-  //   return <Spinner />;
-  // }
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="min-h-screen flex-auto items-center justify-center">
