@@ -69,7 +69,7 @@ function Products() {
         <div className="grid grid-cols-3 gap-4">
           {categories?.map((category, index) => (
             <>
-              <Link to={`/products/${category.category}`}>
+              <Link to={`/products/${category.category}/page/${1}`}>
                 <CustomHeader key={index} category={category.category} />
               </Link>
             </>

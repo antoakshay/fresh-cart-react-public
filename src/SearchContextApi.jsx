@@ -5,7 +5,7 @@ const SearchContext = createContext();
 export const useSearchContext = () => useContext(SearchContext);
 
 export function SearchContextProvider({ children }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   // !! Setting the signUp Auth state in memory localstorage
   const [signUpAuth, setSignUpAuth] = useState(() => {

@@ -12,27 +12,47 @@ import CustomProductItem from './CustomProductItem';
 
 function CustomProducts() {
   const { id } = useParams();
+  const { pageNumber } = useParams();
+  // console.log(pageNumber);
 
   const [products, setProducts] = useState([]);
   const [totalPage, setTotalPage] = useState();
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState();
+  const [localId, setLocalId] = useState();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
+  // Setting the page number from the params
+  useEffect(() => {
+    setLocalId(id);
+    setPage(pageNumber);
+  }, [id, pageNumber]);
+
+  // Handling the page changes here..
   function handlePageChange(data) {
-    setPage(data.selected + 1);
+    // console.log(data.selected);
+    // !! The data.selected is a zero based index
+    const newPage = data.selected + 1;
+    // !! Disabling the setPage here as it causes a render before navigating to the new page
+    // setPage(newPage);
+    // console.log(newPage);
+    navigate(`/products/${id}/page/${parseInt(newPage)}`);
   }
 
   useEffect(() => {
     const getProductCountNumber = async () => {
       if (isAuthenticated) {
         try {
+          setLoading(true);
           const response = await getProductCount(id);
           console.log(response);
           const productCount = response.data;
           setTotalPage(Math.ceil(productCount / 10));
         } catch (err) {
           console.log(err);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -41,23 +61,24 @@ function CustomProducts() {
   }, [id, isAuthenticated]);
 
   useEffect(() => {
+    // !! JUST TO PREVENT ANY UNWANTED API CALLS
+    if (!localId || !page) return;
     async function getProducts() {
       if (isAuthenticated) {
         try {
           setLoading(true);
-          const response = await getProductForId(page, id);
+          const response = await getProductForId(page, localId);
           console.log(response.data);
           setProducts(response.data);
-          setLoading(false);
         } catch (err) {
           console.log(err);
+        } finally {
+          setLoading(false);
         }
       }
     }
     getProducts();
-  }, [id, isAuthenticated, page]);
-
-  const navigate = useNavigate();
+  }, [localId, isAuthenticated, page]);
 
   const isCartLoading = useSelector((state) => state.cart.loading);
 
@@ -78,7 +99,7 @@ function CustomProducts() {
     return <Spinner />;
   }
 
- /*  if (isCartLoading) {
+  /*  if (isCartLoading) {
     return <Spinner />;
   } */
 
@@ -94,7 +115,8 @@ function CustomProducts() {
           onPageChange={handlePageChange}
           pageCount={totalPage}
           // !! 0 based index, thats why -1 here
-          forcePage={page - 1}
+          // !!  Force the active page to be index 0 (first page)
+          forcePage={pageNumber - 1}
           breakLabel="..."
           containerClassName="flex justify-center items-center mt-4 space-x-2"
           pageClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-200 transition"

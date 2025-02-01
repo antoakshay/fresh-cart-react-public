@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { findProducts } from '../../../services/apiSearchBar';
 import { redirect, replace, useNavigate } from 'react-router-dom';
 import { useSearchContext } from '../../../SearchContextApi';
+import { useMutation } from '@tanstack/react-query';
+import Spinner from '../../../ui/Spinner';
 
 function Searchbar() {
   const { query, setQuery } = useSearchContext();
   const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState();
 
   const navigate = useNavigate();
 
@@ -14,14 +17,23 @@ function Searchbar() {
     if (!query) return alert('Do I look like a mind reader? TYPE SOMETHING!');
     if (query.length < 3) return alert('Please input more than 3 characters');
 
-    const response = await findProducts(query);
+    // const response = await findProducts(query);
+    // if (!response) return alert('No results found!');
+    try {
+      setLoading(true);
+      // sessionStorage.setItem('search_product_query', JSON.stringify(query));
 
-    if (!response) return alert('No results found!');
-
-    sessionStorage.setItem('search_product_query', JSON.stringify(query));
-
-    navigate('/searchedProducts');
+      navigate(`/searchedProducts/query/${query}/page/${1}`);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
     // console.log(response);
+  }
+
+  if (loading) {
+    return <Spinner />;
   }
 
   return (

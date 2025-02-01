@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 // import { loader as categoryLoader } from './ui/Products';
 import { action as placeOrderAction } from './features/Order/OrderWIndow';
 import { loader as orderLoader } from './features/Order/OrderDetails';
-import { loader as searchResultLoader } from './features/SearchProducts/SearchedProducts';
+// import { loader as searchResultLoader } from './features/SearchProducts/SearchedProducts';
 import Applayout from './ui/Applayout';
 import Error from './ui/Error';
 import Home from './ui/Home';
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         // loader: categoryLoader,
       },
       {
-        path: '/products/:id',
+        path: '/products/:id/page/:pageNumber',
         element: <CustomProducts />,
       },
       {
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
         element: <OrderDetails />,
       },
       {
-        path: '/searchedProducts',
+        path: '/searchedProducts/query/:queryName/page/:pageNumber',
         element: <SearchedProducts />,
         // loader: searchResultLoader,
       },

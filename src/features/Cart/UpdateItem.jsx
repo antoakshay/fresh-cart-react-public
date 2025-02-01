@@ -61,7 +61,6 @@ function UpdateItem({ id, currentQuantity }) {
     }
   }
 
-  const cartLoadingState = useSelector((state) => state.cart.loading);
   return (
     <div className="flex items-center gap-1 md:gap-2">
       {loading ? (
@@ -78,7 +77,6 @@ function UpdateItem({ id, currentQuantity }) {
           <input
             value={currentQuantity}
             className="h-8 w-10 rounded-md border border-gray-300 bg-white text-center text-sm font-medium focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-      
           />
           <Button
             type="round"

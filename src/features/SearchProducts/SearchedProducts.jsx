@@ -3,39 +3,51 @@ import { useSearchContext } from '../../SearchContextApi';
 import SearchItems from './SearchItems';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartDetails } from '../../services/apiGetCart';
-import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom';
+import {
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+  useParams,
+} from 'react-router-dom';
 import { findProducts } from '../../services/apiSearchBar';
 import { getProductCount } from '../../services/apiProducts';
 import ReactPaginate from 'react-paginate';
 import Spinner from '../../ui/Spinner';
 
-export async function loader() {
-  const query = JSON.parse(sessionStorage.getItem('search_product_query'));
-  // console.log(query);
-  const searchedData = await findProducts(query);
-  // console.log(searchedData.data);
-  return searchedData.data;
-}
+// export async function loader() {
+//   const query = JSON.parse(sessionStorage.getItem('search_product_query'));
+//   // console.log(query);
+//   const searchedData = await findProducts(query);
+//   // console.log(searchedData.data);
+//   return searchedData.data;
+// }
 
 function SearchedProducts() {
   // const loaderData = useLoaderData();
   // const { query } = useSearchContext();
-  const query = JSON.parse(sessionStorage.getItem('search_product_query'));
-
+  const { queryName } = useParams();
+  // console.log(queryName);
+  // const query = JSON.parse(sessionStorage.getItem('search_product_query'));
+  const { pageNumber } = useParams();
   const [loading, setLoading] = useState(false);
 
   const [totalPage, setTotalPage] = useState();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(pageNumber);
   const [products, setProducts] = useState([]);
-
+  const [localQuery, setLocalQuery] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setPage(pageNumber);
+    setLocalQuery(queryName);
+  }, [pageNumber, queryName]);
 
   const isCartLoading = useSelector((state) => state.cart.loading);
 
   useEffect(() => {
     const getProductCountNumber = async () => {
       try {
-        const response = await getProductCount(query);
+        const response = await getProductCount(queryName);
         console.log(response);
         const productCount = response.data;
         setTotalPage(Math.ceil(productCount / 10));
@@ -45,18 +57,22 @@ function SearchedProducts() {
     };
 
     getProductCountNumber();
-  }, [query]);
+  }, [queryName]);
 
   function handlePageChange(data) {
-    setPage(data.selected + 1);
+    const newPage = data.selected + 1;
+    // setPage(newPage);
+    // !! Disabling the setPage here as it causes a render before navigating to the new page
+    navigate(`/searchedProducts/query/${queryName}/page/${newPage}`);
   }
 
   useEffect(() => {
+    if (!page || !localQuery) return;
     async function getProducts() {
       try {
         setLoading(true);
 
-        const response = await findProducts(query, page);
+        const response = await findProducts(localQuery, page);
         console.log(response.data);
         setProducts(response.data);
         setLoading(false);
@@ -65,7 +81,7 @@ function SearchedProducts() {
       }
     }
     getProducts();
-  }, [page, query]);
+  }, [page, localQuery]);
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   //!! Redirecting to login page if user is NOT authenticated
@@ -80,7 +96,7 @@ function SearchedProducts() {
     return null;
   }
 
-  if (!query) {
+  if (!queryName) {
     return (
       <div className="flex min-h-screen w-full items-center justify-center">
         Search For Something! From the HomePage
@@ -88,7 +104,7 @@ function SearchedProducts() {
     );
   }
 
-/*   if (isCartLoading) {
+  /*   if (isCartLoading) {
     return <Spinner />;
   } */
 
@@ -110,7 +126,7 @@ function SearchedProducts() {
           <ReactPaginate
             onPageChange={handlePageChange}
             pageCount={totalPage}
-            forcePage={page - 1}
+            forcePage={pageNumber - 1}
             breakLabel="..."
             containerClassName="flex justify-center items-center mt-4 space-x-2"
             pageClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-200 transition"
