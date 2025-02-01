@@ -7,7 +7,6 @@ import Loader from '../../../ui/Loading';
 import { useSearchContext } from '../../../SearchContextApi';
 import { Button } from '@mui/material';
 
-
 function CustomProductItem({ product }) {
   const { _id, name, price, soldOut } = product;
   const dispatch = useDispatch();
@@ -83,9 +82,9 @@ function CustomProductItem({ product }) {
               <UpdateItem currentQuantity={productQuantity} id={_id} />
             )}
             <Button
-              className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="h-8 min-w-[2rem] rounded-sm bg-red-500 px-2.5 py-0.5 text-xs text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               onClick={() => handleDeleteProduct()}
-              disabled={updateQtyLoading}
+              disabled={updateQtyLoading[_id]?.delete}
             >
               {deleteLoading ? <Loader /> : 'Delete'}
             </Button>

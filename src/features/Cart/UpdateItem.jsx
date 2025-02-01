@@ -11,20 +11,20 @@ function UpdateItem({ id, currentQuantity }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { updateQtyLoading, setUpdateQtyLoading } = useSearchContext();
-  useEffect(() => {
-    // console.log(id);
-  }, [id]);
-  const isSelected = useSelector((state) =>
-    state.cart.items.some((item) => item._id === id),
-  );
-  useEffect(() => {
-    console.log(isSelected);
-  }, [isSelected]);
 
-  async function handleClick() {
+  async function handleClick(productId) {
     try {
       setLoading(true);
-      setUpdateQtyLoading(true);
+      // If you update the state without spreading prev, the new state object will
+      // only contain the new key-value pair(current delete boolean for the selected productId).
+      //  All the other key-value pairs (previous delete button states boolean)
+      //  from the previous state will be lost.
+      setUpdateQtyLoading((prev) => ({
+        ...prev,
+        // !! spreads the existing object for that product (prev[productId]) to copy its current properties.
+        // !! To protect React's Immutability;
+        [productId]: { ...prev[productId], delete: true },
+      }));
       await dispatch(updateItemQuantity({ productId: id, quantity: -1 }));
     } catch (e) {
       setLoading(false);
@@ -32,13 +32,20 @@ function UpdateItem({ id, currentQuantity }) {
       setUpdateQtyLoading(false);
     } finally {
       setLoading(false);
-      setUpdateQtyLoading(false);
+      setUpdateQtyLoading((prev) => ({
+        ...prev,
+        [productId]: { ...prev[productId], delete: false },
+      }));
     }
   }
 
-  async function handleClick2() {
+  async function handleClick2(productId) {
     try {
-      setUpdateQtyLoading(true);
+      setUpdateQtyLoading((prev) => ({
+        ...prev,
+        // !! spreads the existing object for that product (prev[productId]) to copy its current properties.
+        [productId]: { ...(prev[productId] || {}), delete: true },
+      }));
       setLoading(true);
       await dispatch(updateItemQuantity({ productId: id, quantity: 1 }));
     } catch (e) {
@@ -47,44 +54,41 @@ function UpdateItem({ id, currentQuantity }) {
       setUpdateQtyLoading(false);
     } finally {
       setLoading(false);
-      setUpdateQtyLoading(false);
+      setUpdateQtyLoading((prev) => ({
+        ...prev,
+        [productId]: { ...prev[productId], delete: false },
+      }));
     }
   }
 
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
   const cartLoadingState = useSelector((state) => state.cart.loading);
   return (
-    <div className="flex items-center gap-2 md:gap-3">
-      {
-        /* cartLoadingState */ /* && isSelected */ /* updateQtyLoading */ loading ? (
-          <Loader />
-        ) : (
-          <>
-            <Button
-              type="round"
-              onClick={
-                () => handleClick()
-                // dispatch(updateItemQuantity({ productId: id, quantity: -1 }))
-              }
-            >
-              -
-            </Button>
-            <span className="text-sm font-medium">{currentQuantity}</span>
-            <Button
-              type="round"
-              onClick={
-                () => handleClick2()
-                // dispatch(updateItemQuantity({ productId: id, quantity: 1 }))
-              }
-            >
-              +
-            </Button>
-          </>
-        )
-      }
+    <div className="flex items-center gap-1 md:gap-2">
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Button
+            type="round"
+            className="h-8 w-8 rounded-full p-2"
+            onClick={(event) => handleClick(id)}
+          >
+            -
+          </Button>
+          <input
+            value={currentQuantity}
+            className="h-8 w-10 rounded-md border border-gray-300 bg-white text-center text-sm font-medium focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+      
+          />
+          <Button
+            type="round"
+            className="h-8 w-8 rounded-full p-2"
+            onClick={() => handleClick2(id)}
+          >
+            +
+          </Button>
+        </>
+      )}
     </div>
   );
 }

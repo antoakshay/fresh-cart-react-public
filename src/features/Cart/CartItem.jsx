@@ -62,7 +62,7 @@ function CartItem({ item, finalBill }) {
               <Button
                 className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
                 onClick={() => handleDeleteProduct()}
-                disabled={updateQtyLoading}
+                disabled={updateQtyLoading[_id]?.delete || false}
               >
                 {deleteLoading ? <Loader /> : 'Delete'}
               </Button>

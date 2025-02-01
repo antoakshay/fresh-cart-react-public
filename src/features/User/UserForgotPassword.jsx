@@ -61,7 +61,7 @@ function UserForgotPassword() {
               id="email"
               type="email"
               name="email"
-              value="antolazarus7@gmail.com"
+              // value="antolazarus7@gmail.com"
               required
               className="mt-2 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
@@ -71,7 +71,7 @@ function UserForgotPassword() {
             type="submit"
             className="mt-4 w-full rounded-md bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Reset Password
+            {mutation.isPending ? 'Submitting' : 'Reset Password'}
           </button>
         </form>
       </div>

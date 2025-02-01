@@ -30,7 +30,7 @@ export function SearchContextProvider({ children }) {
     localStorage.setItem('resetPassAuth', JSON.stringify(resetPassAuth));
   }, [resetPassAuth]);
 
-  const [updateQtyLoading, setUpdateQtyLoading] = useState();
+  const [updateQtyLoading, setUpdateQtyLoading] = useState({});
   return (
     <SearchContext.Provider
       value={{
