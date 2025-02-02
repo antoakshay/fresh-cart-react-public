@@ -19,6 +19,7 @@ function Login() {
   }
 
   async function handleSubmit(event) {
+    console.trace(event);
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;

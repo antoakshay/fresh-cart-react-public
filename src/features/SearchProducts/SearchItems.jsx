@@ -78,7 +78,9 @@ function SearchItems({ product }) {
         )}
         {itemInCart && (
           <>
-            <UpdateItem currentQuantity={productQuantity} id={_id} />
+            {deleteLoading ? null : (
+              <UpdateItem currentQuantity={productQuantity} id={_id} />
+            )}
             <Button
               className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               onClick={() => handleDeleteProduct()}
