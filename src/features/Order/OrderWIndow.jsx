@@ -11,6 +11,9 @@ import {
 import { placeOrder } from '../../services/apiPlaceOrder';
 
 function OrderWindow() {
+  // !! TO-DO !!
+  // !! Implement a useMutation hook handle the form submissions API CALLS
+
   const [loading, setLoading] = useState(false);
   const action = useLocation();
   useEffect(() => {
