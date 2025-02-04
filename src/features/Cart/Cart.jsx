@@ -52,6 +52,14 @@ function Cart() {
     cartDetails();
   }, [dispatch, isAuthenticated]);
 
+  const productSoldOut = useSelector((state) => {
+    const product = state.cart.items.some((item) => {
+      // console.log(item);
+      return item.product.soldOut === true;
+    });
+    return product;
+  });
+
   if (!isAuthenticated) {
     return null;
   }
@@ -66,9 +74,14 @@ function Cart() {
       {/* <h2 className="mt-7 text-xl font-semibold">Your cart</h2> */}
       {cartState.items /* cart.products */
         .map((item) => (
-          <CartItem item={item} key={item._id} finalBill={finalBill} />
+          <CartItem
+            item={item}
+            key={item._id}
+            finalBill={finalBill}
+            soldOut={item.product.soldOut}
+          />
         ))}
-      <CartBill totalCartPrice={finalBill} />
+      <CartBill totalCartPrice={finalBill} soldOut={productSoldOut} />
     </div>
   );
 }

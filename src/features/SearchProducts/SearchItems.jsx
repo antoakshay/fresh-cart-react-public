@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItemQuantity } from '../Cart/cartSlice';
+import { deleteProduct, updateItemQuantity } from '../Cart/cartSlice';
 import UpdateItem from '../Cart/UpdateItem';
 import { useSearchContext } from '../../SearchContextApi';
 import { Button } from '@mui/material';
@@ -48,7 +48,7 @@ function SearchItems({ product }) {
       // console.log(id);
       setDeleteLoading(true);
       await dispatch(
-        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+        deleteProduct({ productId: _id/* , quantity: -productQuantity */ }),
       );
     } catch (err) {
       alert('Something went wrong while deleting the product');

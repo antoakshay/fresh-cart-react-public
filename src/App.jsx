@@ -30,6 +30,7 @@ import UserResetPassword from './features/User/UserResetPassword';
 import UserResetPassMessage from './features/User/UserResetPassMessage';
 import UserResetPassErrorMessage from './features/User/UserResetPassErrorMessage';
 import UserSetPassword from './features/User/UserSetPassword';
+import OrderHistory from './features/Order/OrderHistory';
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
         path: '/cart',
         // loader: CartLoader,
         element: <Cart />,
+      },
+      {
+        path: '/orderHistory/sort/:sortNumber',
+        element: <OrderHistory/>
       },
       {
         path: '/order',

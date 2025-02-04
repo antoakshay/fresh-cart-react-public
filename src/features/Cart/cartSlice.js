@@ -49,7 +49,7 @@ export const getCartDetails = createAsyncThunk(
   },
 );
 
-// !! Currently not supported
+//  Currently not supported => FIXED NOW!!
 export const deleteProduct = createAsyncThunk(
   'cart/deleteProduct',
   async ({ productId }, thunkAPI) => {
@@ -122,7 +122,7 @@ const cartSlice = createSlice({
         console.log(state.items);
         state.status = 'succeeded';
         state.loading = false;
-        console.log(action.payload.products);
+        console.log(action.payload);
         state.items = action.payload.products;
 
         state.totalPrice = action.payload.totalPrice;
@@ -148,6 +148,7 @@ const cartSlice = createSlice({
         state.totalQuantity = action.payload.totalQuantity;
       })
       .addCase(getCartDetails.rejected, (state, action) => {
+        console.log(action.error);
         state.loading = false;
         state.items = [];
         state.error = action.error.message;

@@ -34,9 +34,11 @@ function UserPage() {
               <span className="font-medium text-gray-800">Email:</span> {email}
             </p>
           </div>
-          <button className="mb-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-center font-medium text-white hover:bg-blue-600">
-            Your Order History
-          </button>
+          <Link to="/orderHistory/sort/1">
+            <button className="mb-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-center font-medium text-white hover:bg-blue-600">
+              Your Order History
+            </button>
+          </Link>
           <Link to="/updatePassword" className="tracking-widest">
             <button className="w-full rounded-lg bg-green-500 px-4 py-2 text-center font-medium text-white hover:bg-green-600">
               Update Password

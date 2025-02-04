@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import CartEmpty from './CartEmpty';
 
-function CartBill({ totalCartPrice }) {
+function CartBill({ totalCartPrice, soldOut }) {
   const navigate = useNavigate();
   return (
     <>
@@ -19,7 +19,12 @@ function CartBill({ totalCartPrice }) {
       </footer>
       {totalCartPrice !== 0 && (
         <button
-          className="ml-auto rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 focus:outline-none"
+          disabled={soldOut}
+          className={`ml-auto rounded-lg px-6 py-2 text-white focus:outline-none ${
+            soldOut
+              ? 'cursor-not-allowed bg-gray-400'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
           onClick={() => navigate('/order')}
         >
           Order Now

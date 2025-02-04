@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItemQuantity } from '../../Cart/cartSlice';
+import { updateItemQuantity,deleteProduct } from '../../Cart/cartSlice';
 import UpdateItem from '../../Cart/UpdateItem';
 import { useState } from 'react';
 import Spinner from '../../../ui/Spinner';
@@ -48,7 +48,7 @@ function CustomProductItem({ product }) {
     try {
       setDeleteLoading(true);
       await dispatch(
-        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+        deleteProduct({ productId: _id/* , quantity: -productQuantity */ }),
       );
     } catch (e) {
       alert('Error deleting product');

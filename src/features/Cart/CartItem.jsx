@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartBill from './CartBill';
 import UpdateItem from './UpdateItem';
 import { useEffect, useState } from 'react';
-import { updateItemQuantity } from './cartSlice';
+import { deleteProduct, updateItemQuantity } from './cartSlice';
 import Loader from '../../ui/Loading';
 import { Button } from '@mui/material';
 import { useSearchContext } from '../../SearchContextApi';
 
-function CartItem({ item, finalBill }) {
+function CartItem({ item, finalBill ,soldOut}) {
   // console.log(item);
   const { /* _id, */ price, /* name, */ /* totalPrice, */ quantity } = item;
   let _id = item.product._id;
@@ -38,7 +38,7 @@ function CartItem({ item, finalBill }) {
     try {
       setDeleteLoading(true);
       await dispatch(
-        updateItemQuantity({ productId: _id, quantity: -productQuantity }),
+        deleteProduct({ productId: _id/* , quantity: -productQuantity */ }),
       );
     } catch (err) {
       alert('Something went wrong while deleting the product');
@@ -58,16 +58,31 @@ function CartItem({ item, finalBill }) {
 
           {productQuantity > 0 && (
             <>
-              {deleteLoading ? null : (
-                <UpdateItem currentQuantity={productQuantity} id={_id} />
+              {soldOut ? (
+                <>
+                  <span>Sold Out!</span>
+                  <Button
+                    className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    onClick={() => handleDeleteProduct()}
+                    disabled={updateQtyLoading[_id]?.delete || false}
+                  >
+                    {deleteLoading ? <Loader /> : 'Delete'}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  {!deleteLoading && (
+                    <UpdateItem currentQuantity={productQuantity} id={_id} />
+                  )}
+                  <Button
+                    className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    onClick={() => handleDeleteProduct()}
+                    disabled={updateQtyLoading[_id]?.delete || false}
+                  >
+                    {deleteLoading ? <Loader /> : 'Delete'}
+                  </Button>
+                </>
               )}
-              <Button
-                className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                onClick={() => handleDeleteProduct()}
-                disabled={updateQtyLoading[_id]?.delete || false}
-              >
-                {deleteLoading ? <Loader /> : 'Delete'}
-              </Button>
             </>
           )}
         </li>
