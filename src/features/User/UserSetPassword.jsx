@@ -50,15 +50,15 @@ function UserSetPassword() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="mx-auto max-w-sm rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-6 text-center text-2xl font-semibold">
+      <div className="mx-auto max-w-sm rounded-lg bg-black p-6 shadow-md">
+        <h2 className="mb-6 text-center text-2xl font-semibold text-white">
           Update Password
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="new-password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               New Password
             </label>
@@ -66,7 +66,7 @@ function UserSetPassword() {
               type="password"
               id="password"
               name="new-password"
-              className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-2 bg-black text-white w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your new password"
               min="8"
               max="15"
@@ -76,7 +76,7 @@ function UserSetPassword() {
           <div className="mb-6">
             <label
               htmlFor="confirm-password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Confirm Password
             </label>
@@ -84,7 +84,7 @@ function UserSetPassword() {
               type="password"
               id="passwordConfirm"
               name="confirm-password"
-              className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-2 w-full bg-black text-white rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your new password"
               min="8"
               max="15"

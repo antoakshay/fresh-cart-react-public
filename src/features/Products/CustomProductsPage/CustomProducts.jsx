@@ -104,8 +104,8 @@ function CustomProducts() {
   } */
 
   return (
-    <div className="flex min-h-screen w-full flex-col justify-between">
-      <ul className="w-full space-y-4 divide-y divide-gray-500 px-4">
+    <div className="flex min-h-screen w-full flex-col justify-between bg-gray text-white">
+      <ul className="w-full space-y-4 divide-y divide-gray-700 px-4">
         {products.map((product) => (
           <CustomProductItem product={product} key={product._id} />
         ))}
@@ -115,20 +115,21 @@ function CustomProducts() {
           onPageChange={handlePageChange}
           pageCount={totalPage}
           // !! 0 based index, thats why -1 here
-          // !!  Force the active page to be index 0 (first page)
+          // !! Force the active page to be index 0 (first page)
           forcePage={pageNumber - 1}
           breakLabel="..."
           containerClassName="flex justify-center items-center mt-4 space-x-2"
-          pageClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-200 transition"
-          pageLinkClassName="text-gray-700"
-          activeClassName="bg-blue-500 text-white"
-          disabledClassName="text-gray-300 cursor-not-allowed"
-          previousClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-200 transition"
-          nextClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-200 transition"
+          pageClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-800 transition"
+          pageLinkClassName="text-gray-300"
+          activeClassName="bg-lime-500 text-black"
+          disabledClassName="text-gray-600 cursor-not-allowed"
+          previousClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-800 transition"
+          nextClassName="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-800 transition"
         />
       </div>
     </div>
   );
+
 }
 
 export default CustomProducts;

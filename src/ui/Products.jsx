@@ -62,7 +62,7 @@ function Products() {
 
   return (
     <div className="">
-      <div className="aspect-square flex-auto items-center justify-center rounded-lg border border-gray-200 bg-stone-200 p-4 shadow-md">
+      <div className="aspect-square flex-auto items-center justify-center rounded-lg  p-4 ">
         {/* <Link to="/products/fruits">
           <Fruit />
         </Link> */}

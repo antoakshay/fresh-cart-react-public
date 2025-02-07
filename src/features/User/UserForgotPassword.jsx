@@ -45,15 +45,15 @@ function UserForgotPassword() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-lg">
-        <h2 className="text-center text-2xl font-semibold text-gray-700">
+      <div className="w-full max-w-md space-y-6 rounded-lg bg-black p-8 shadow-lg">
+        <h2 className="text-center text-2xl font-semibold text-white">
           Forgot Password
         </h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-white"
             >
               Email Address
             </label>
@@ -63,7 +63,7 @@ function UserForgotPassword() {
               name="email"
               // value="antolazarus7@gmail.com"
               required
-              className="mt-2 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-2 bg-black text-white w-full rounded-md border border-gray-300 p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
             />
           </div>

@@ -36,27 +36,28 @@ function Searchbar() {
     return <Spinner />;
   }
 
-  return (
-    <form onSubmit={handleSearch} className="flex items-center gap-2">
-      <input
-        type="text"
-        placeholder="Search for products"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      {query.length > 3 ? (
-        <button
-          type="submit"
-          className={`rounded-lg px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${disable ? 'cursor-not-allowed bg-gray-400' : 'bg-blue-500'}`}
-          style={{ height: '100%' }}
-          // disabled={disable}
-        >
-          Search
-        </button>
-      ) : null}
-    </form>
-  );
+ return (
+   <form onSubmit={handleSearch} className="flex items-center gap-2">
+     <input
+       type="text"
+       placeholder="Search for products"
+       value={query}
+       onChange={(e) => setQuery(e.target.value)}
+       className="flex-1 rounded-lg border border-gray-600 bg-gray-900 px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-500"
+     />
+     {query.length > 3 ? (
+       <button
+         type="submit"
+         className={`rounded-lg px-4 py-2 text-white hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 ${disable ? 'cursor-not-allowed bg-gray-400' : 'bg-lime-500'}`}
+         style={{ height: '100%' }}
+         // disabled={disable}
+       >
+         Search
+       </button>
+     ) : null}
+   </form>
+ );
+
 }
 
 export default Searchbar;

@@ -39,10 +39,11 @@ function Header() {
   }
 
   return (
-    <header className="flex items-center justify-between border-b-2 border-stone-500 bg-lime-400 px-4 py-3 uppercase sm:px-6">
-      <Link to="/home" className="tracking-widest">
+    <header className="flex items-center justify-between border-b-2 border-stone-500 bg-lime-700 px-4 py-3 uppercase sm:px-6">
+      <Link to="/home" className="tracking-widest text-white">
         Fresh Cart🍇
       </Link>
+
       <div className="flex items-center gap-4">
         {isAuthenticated && (
           <Link to="/user" className="tracking-widest">
@@ -53,12 +54,12 @@ function Header() {
         )}
         {isAuthenticated /*  && isAdded */ && <Cartoverview />}
         {isAuthenticated ? (
-          <Link to="/products" className="text-sm">
+          <Link to="/products" className="text-sm text-white">
             Products
           </Link>
         ) : null}
         {isAuthenticated ? (
-          <button className="text-sm" onClick={() => handleLogOut()}>
+          <button className="text-sm text-white" onClick={() => handleLogOut()}>
             Log-Out
           </button>
         ) : null}

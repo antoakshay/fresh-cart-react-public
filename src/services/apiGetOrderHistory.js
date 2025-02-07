@@ -24,3 +24,28 @@ export async function getOrderHistory(sortId) {
     return null;
   }
 }
+
+export async function getIndividualOrder(orderId) {
+  console.log(orderId);
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/orders/trackOrder`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({ orderId: orderId }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log('Error:', error);
+    return null;
+  }
+}

@@ -64,11 +64,11 @@ function UserOtp() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-        <h1 className="mb-6 text-center text-2xl font-semibold text-gray-700">
+      <div className="w-full max-w-md rounded-lg bg-black p-8 shadow-lg">
+        <h1 className="mb-6 text-center text-2xl font-semibold text-white">
           OTP Verification
         </h1>
-        <p className="mb-6 text-center text-gray-600">
+        <p className="mb-6 text-center text-white">
           A 7-digit OTP has been sent to your email address. Please check your
           email and enter the OTP below to verify your identity.
         </p>
@@ -79,7 +79,7 @@ function UserOtp() {
               id="otp"
               minLength="7"
               maxLength="7"
-              className="w-full rounded-md border border-gray-300 px-4 py-3 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="w-full bg-black text-white rounded-md border border-gray-300 px-4 py-3 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               placeholder="Enter OTP"
               inputMode="numeric"
               pattern="[0-9]*"

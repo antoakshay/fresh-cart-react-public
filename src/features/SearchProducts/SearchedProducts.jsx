@@ -113,8 +113,8 @@ function SearchedProducts() {
   }
 
   return (
-    <div className="flex min-h-screen w-full flex-col justify-between">
-      <ul className="w-full space-y-4 divide-y divide-gray-500 px-4">
+    <div className="bg-gray flex min-h-screen w-full flex-col justify-between text-white">
+      <ul className="w-full space-y-4 divide-y divide-gray-700 px-4">
         {
           /* loaderData */ products.map((product) => (
             <SearchItems product={product} key={product._id}></SearchItems>

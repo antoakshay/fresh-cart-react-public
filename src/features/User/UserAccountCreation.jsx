@@ -73,21 +73,21 @@ function UserAccountCreation() {
       className="flex min-h-screen w-full flex-col items-center justify-center"
       onSubmit={handleSubmit}
     >
-      <form className="w-96 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-center text-2xl font-semibold">Sign Up</h2>
+      <form className="w-96 rounded-lg bg-black p-6 shadow-md">
+        <h2 className="mb-4 text-center text-2xl font-semibold text-white">Sign Up</h2>
 
         {/* Name Field */}
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white"
           >
             Name
           </label>
           <input
             type="text"
             id="name"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 bg-black text-white block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Enter your name"
           />
         </div>
@@ -96,14 +96,14 @@ function UserAccountCreation() {
         <div className="mb-4">
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white"
           >
             Password
           </label>
           <input
             type="password"
             id="password"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 bg-black text-white block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Enter your password"
             minLength="8"
             maxLength="15"
@@ -117,14 +117,14 @@ function UserAccountCreation() {
         <div className="mb-4">
           <label
             htmlFor="passwordConfirm"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white"
           >
             Confirm Password
           </label>
           <input
             type="password"
             id="passwordConfirm"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 bg-black text-white block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Confirm your password"
             minLength="8"
             maxLength="15"

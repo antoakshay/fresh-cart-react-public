@@ -47,48 +47,64 @@ function CartItem({ item, finalBill ,soldOut}) {
     }
   }
 
-  return (
-    <>
-      <div className="flex-auto items-center justify-center py-6">
-        <li className="flex-auto items-center py-3 sm:flex sm:justify-between">
-          <p className="mb-1 sm:mb-0">
-            {quantity}&times; {name}
-          </p>
-          <p className="mb-1 sm:mb-0">{totalPrice} $</p>
+ return (
+   <div className="mx-auto max-w-6xl px-4 py-6">
+     <ul className="space-y-4">
+       <li className="grid grid-cols-1 items-center gap-4 rounded-lg border border-gray-200 p-4 shadow-sm transition-colors hover:bg-gray-800 md:grid-cols-12">
+         {/* Product Details */}
+         <div className="col-span-4 break-words font-medium text-white">
+           {quantity} × {name}
+         </div>
 
-          {productQuantity > 0 && (
-            <>
-              {soldOut ? (
-                <>
-                  <span>Sold Out!</span>
-                  <Button
-                    className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    onClick={() => handleDeleteProduct()}
-                    disabled={updateQtyLoading[_id]?.delete || false}
-                  >
-                    {deleteLoading ? <Loader /> : 'Delete'}
-                  </Button>
-                </>
-              ) : (
-                <>
-                  {!deleteLoading && (
-                    <UpdateItem currentQuantity={productQuantity} id={_id} />
-                  )}
-                  <Button
-                    className="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    onClick={() => handleDeleteProduct()}
-                    disabled={updateQtyLoading[_id]?.delete || false}
-                  >
-                    {deleteLoading ? <Loader /> : 'Delete'}
-                  </Button>
-                </>
-              )}
-            </>
-          )}
-        </li>
-      </div>
-    </>
-  );
+         {/* Price */}
+         <div className="col-span-2 text-lg font-semibold text-emerald-300">
+           {totalPrice} $
+         </div>
+
+         {/* Actions */}
+         <div className="col-span-6 flex items-center gap-3">
+           {productQuantity > 0 && (
+             <>
+               {soldOut ? (
+                 <>
+                   <span className="font-medium text-red-600">Sold Out!</span>
+                   <button
+                     className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                     onClick={() => handleDeleteProduct()}
+                     disabled={updateQtyLoading[_id]?.delete || false}
+                   >
+                     {deleteLoading ? <Loader /> : 'Delete'}
+                   </button>
+                 </>
+               ) : (
+                 <>
+                   {!deleteLoading && (
+                     <UpdateItem
+                       currentQuantity={productQuantity}
+                       id={_id}
+                       className="rounded-lg border border-gray-300"
+                     />
+                   )}
+                   <Button
+                     variant="contained"
+                     color="error"
+                     size="small"
+                     onClick={() => handleDeleteProduct()}
+                     disabled={updateQtyLoading[_id]?.delete}
+                     className="shadow-sm transition-shadow hover:shadow-md"
+                   >
+                     {deleteLoading ? <Loader /> : 'Delete'}
+                   </Button>
+                 </>
+               )}
+             </>
+           )}
+         </div>
+       </li>
+     </ul>
+   </div>
+ );
+
 }
 
 export default CartItem;

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItemQuantity,deleteProduct } from '../../Cart/cartSlice';
+import { updateItemQuantity, deleteProduct } from '../../Cart/cartSlice';
 import UpdateItem from '../../Cart/UpdateItem';
 import { useState } from 'react';
 import Spinner from '../../../ui/Spinner';
@@ -48,7 +48,7 @@ function CustomProductItem({ product }) {
     try {
       setDeleteLoading(true);
       await dispatch(
-        deleteProduct({ productId: _id/* , quantity: -productQuantity */ }),
+        deleteProduct({ productId: _id /* , quantity: -productQuantity */ }),
       );
     } catch (e) {
       alert('Error deleting product');
@@ -58,38 +58,74 @@ function CustomProductItem({ product }) {
   }
 
   return (
-    <div className="flex-auto items-center justify-center py-6">
-      <ul className="grid grid-cols-5 gap-4 border border-gray-400 p-4">
-        <li className="break-words">{name}</li>
-        {!soldOut && <li className="break-words">{price}$ </li>}
-        <li className="break-words">
-          {!soldOut ? 'Available' : 'Out of stock'}
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <ul className="space-y-4">
+        {/* Grid Header */}
+        <li className="hidden grid-cols-12 gap-4 px-4 py-2 font-medium text-white md:grid">
+          <div className="col-span-4">Product</div>
+          <div className="col-span-2">Price</div>
+          <div className="col-span-2">Status</div>
+          <div className="col-span-4">Actions</div>
         </li>
-        {!soldOut && !itemInCart && (
-          <>
-            <button
-              onClick={handleAddToCart}
-              className="rounded-md bg-lime-500 px-3 py-1 text-white"
+
+        {/* Product Item */}
+        <li className="grid grid-cols-1 items-center gap-4 rounded-lg border border-gray-200 p-4 shadow-sm transition-colors hover:bg-gray-900 md:grid-cols-12">
+          {/* Product Name */}
+          <div className="col-span-4 break-words font-medium text-white">
+            {name}
+          </div>
+
+          {/* Price */}
+          {!soldOut && (
+            <div className="col-span-2 text-lg font-semibold text-emerald-600">
+              ${price}
+            </div>
+          )}
+
+          {/* Status */}
+          <div className="col-span-2">
+            <span
+              className={`inline-flex items-center rounded-full px-3 py-1 text-sm ${!soldOut ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}
             >
-              {loading ? <Loader /> : 'Add to Cart'}
-            </button>
-            <div>{itemInCart ? `Quantity: ${productQuantity}` : null}</div>
-          </>
-        )}
-        {itemInCart && (
-          <>
-            {deleteLoading ? null : (
-              <UpdateItem currentQuantity={productQuantity} id={_id} />
+              {!soldOut ? 'Available' : 'Out of stock'}
+            </span>
+          </div>
+
+          {/* Actions */}
+          <div className="col-span-4 flex items-center gap-3">
+            {!soldOut && !itemInCart && (
+              <button
+                onClick={handleAddToCart}
+                className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 font-medium text-white transition-colors hover:bg-emerald-700"
+                disabled={loading}
+              >
+                {loading ? <Loader /> : 'Add to Cart'}
+              </button>
             )}
-            <Button
-              className="h-8 min-w-[2rem] rounded-sm bg-red-500 px-2.5 py-0.5 text-xs text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-              onClick={() => handleDeleteProduct()}
-              disabled={updateQtyLoading[_id]?.delete}
-            >
-              {deleteLoading ? <Loader /> : 'Delete'}
-            </Button>
-          </>
-        )}
+
+            {itemInCart && (
+              <div className="flex items-center gap-3">
+                {!deleteLoading && (
+                  <UpdateItem
+                    currentQuantity={productQuantity}
+                    id={_id}
+                    className="rounded-lg border-gray-300"
+                  />
+                )}
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  onClick={() => handleDeleteProduct()}
+                  disabled={updateQtyLoading[_id]?.delete}
+                  className="shadow-sm transition-shadow hover:shadow-md"
+                >
+                  {deleteLoading ? <Loader /> : 'Delete'}
+                </Button>
+              </div>
+            )}
+          </div>
+        </li>
       </ul>
     </div>
   );

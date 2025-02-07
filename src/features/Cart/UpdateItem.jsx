@@ -17,8 +17,8 @@ function UpdateItem({ id, currentQuantity }) {
       setLoading(true);
       // If you update the state without spreading prev, the new state object will
       // only contain the new key-value pair(current delete boolean for the selected productId).
-      //  All the other key-value pairs (previous delete button states boolean)
-      //  from the previous state will be lost.
+      // All the other key-value pairs (previous delete button states boolean)
+      // from the previous state will be lost.
       setUpdateQtyLoading((prev) => ({
         ...prev,
         // !! spreads the existing object for that product (prev[productId]) to copy its current properties.
@@ -27,9 +27,7 @@ function UpdateItem({ id, currentQuantity }) {
       }));
       await dispatch(updateItemQuantity({ productId: id, quantity: -1 }));
     } catch (e) {
-      setLoading(false);
       alert('Error updating quantity');
-      setUpdateQtyLoading(false);
     } finally {
       setLoading(false);
       setUpdateQtyLoading((prev) => ({
@@ -49,9 +47,7 @@ function UpdateItem({ id, currentQuantity }) {
       setLoading(true);
       await dispatch(updateItemQuantity({ productId: id, quantity: 1 }));
     } catch (e) {
-      setLoading(false);
       alert('Error updating quantity');
-      setUpdateQtyLoading(false);
     } finally {
       setLoading(false);
       setUpdateQtyLoading((prev) => ({
@@ -61,34 +57,35 @@ function UpdateItem({ id, currentQuantity }) {
     }
   }
 
-  return (
-    <div className="flex items-center gap-1 md:gap-2">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Button
-            type="round"
-            className="h-8 w-8 rounded-full p-2"
-            onClick={(event) => handleClick(id)}
-          >
-            -
-          </Button>
-          <input
-            value={currentQuantity}
-            className="h-8 w-10 rounded-md border border-gray-300 bg-white text-center text-sm font-medium focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <Button
-            type="round"
-            className="h-8 w-8 rounded-full p-2"
-            onClick={() => handleClick2(id)}
-          >
-            +
-          </Button>
-        </>
-      )}
-    </div>
-  );
+ return (
+   <div className="flex items-center gap-1 md:gap-2">
+     {loading ? (
+       <Loader />
+     ) : (
+       <>
+         <Button
+           type="round"
+           className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+           onClick={(event) => handleClick(id)}
+         >
+           -
+         </Button>
+         <input
+           defaultValue={currentQuantity}
+           className="h-8 w-10 rounded-md border border-gray-600 bg-gray-800 text-center text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+         />
+         <Button
+           type="round"
+           className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+           onClick={() => handleClick2(id)}
+         >
+           +
+         </Button>
+       </>
+     )}
+   </div>
+ );
+
 }
 
 export default UpdateItem;

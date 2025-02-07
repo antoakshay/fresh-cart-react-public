@@ -70,7 +70,7 @@ function Cart() {
 
   return (
     <div className="min-h-screen flex-auto items-center justify-center">
-      <button onClick={() => navigate('/products')}> Back to products</button>
+      <button onClick={() => navigate('/products')} className='text-white'> Back to products</button>
       {/* <h2 className="mt-7 text-xl font-semibold">Your cart</h2> */}
       {cartState.items /* cart.products */
         .map((item) => (

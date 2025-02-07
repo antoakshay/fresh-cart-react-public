@@ -31,6 +31,8 @@ import UserResetPassMessage from './features/User/UserResetPassMessage';
 import UserResetPassErrorMessage from './features/User/UserResetPassErrorMessage';
 import UserSetPassword from './features/User/UserSetPassword';
 import OrderHistory from './features/Order/OrderHistory';
+import IndividualOrder from './features/Order/IndividualOrder';
+import OrderError from './features/Order/OrderError';
 
 const router = createBrowserRouter([
   {
@@ -106,7 +108,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/orderHistory/sort/:sortNumber',
-        element: <OrderHistory/>
+        element: <OrderHistory />,
+      },
+      {
+        path: '/orderHistory/orderId/:orderId',
+        element: <IndividualOrder />,
+      },
+      {
+        path: '/order/Error',
+        element: <OrderError />,
       },
       {
         path: '/order',

@@ -45,17 +45,17 @@ function UserSignUp() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-200">
+    <div className="flex min-h-screen items-center justify-center">
       <form
-        className="w-80 rounded-lg bg-white p-6 shadow-lg"
+        className="w-80 rounded-lg bg-black p-6 shadow-lg"
         onSubmit={handleSubmit}
       >
-        <h2 className="mb-4 text-center text-xl font-semibold text-gray-700">
+        <h2 className="mb-4 text-center text-xl font-semibold text-white">
           New to Fresh-Cart? Sign up with your e-mail
         </h2>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-white"
         >
           Enter your E-mail
         </label>
@@ -65,7 +65,7 @@ function UserSignUp() {
           id="email"
           name="email"
           placeholder="example@example.com"
-          className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-2 bg-black text-white w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"

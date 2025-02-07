@@ -26,6 +26,7 @@ function UserUpdatePassword() {
     onSuccess: (data) => {
       console.log(data);
       navigate('/updatePassword/success', { replace: true });
+      window.location.replace('/updatePassword/success');
     },
     onError: (error) => {
       alert(error);
@@ -60,8 +61,8 @@ function UserUpdatePassword() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-6 text-center text-2xl font-semibold text-gray-800">
+      <div className="w-full max-w-md rounded-lg bg-black p-6 shadow-lg">
+        <h2 className="mb-6 text-center text-2xl font-semibold text-white">
           Update Password
         </h2>
         <form onSubmit={handleSubmit}>
@@ -69,14 +70,14 @@ function UserUpdatePassword() {
           <div className="mb-4">
             <label
               htmlFor="old-password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Old Password
             </label>
             <input
               type="password"
               id="oldpassword"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-600 px-4 py-2 text-white shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your old password"
             />
           </div>
@@ -84,19 +85,19 @@ function UserUpdatePassword() {
           <div className="mb-4">
             <label
               htmlFor="new-password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               New Password
             </label>
             <input
               type="password"
               id="newpassword"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-600 px-4 py-2 text-white shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your new password"
               minLength="8"
               maxLength="15"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-white">
               Min characters: 8, Max characters: 15
             </p>
           </div>
@@ -104,19 +105,19 @@ function UserUpdatePassword() {
           <div className="mb-4">
             <label
               htmlFor="confirm-password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Confirm Password
             </label>
             <input
               type="password"
               id="confirmpassword"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-600 px-4 py-2 text-white shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your new password"
               minLength="8"
               maxLength="15"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-white">
               Min characters: 8, Max characters: 15
             </p>
           </div>

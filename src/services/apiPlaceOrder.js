@@ -1,12 +1,13 @@
-import API_URL from "../../apiUrl";
+import API_URL from '../../apiUrl';
 
 export async function placeOrder(
-  addressLine1,
+ { addressLine1,
   addressLine2,
   city,
   pincode,
-  phoneNumber,
+  phoneNumber,}
 ) {
+  console.log(addressLine1, addressLine2, city, pincode, phoneNumber);
   try {
     const response = await fetch(`${API_URL}/api/v1/orders/placeOrder`, {
       method: 'POST',
@@ -29,6 +30,6 @@ export async function placeOrder(
     return data;
   } catch (error) {
     console.log('Error:', error);
-    return null;
+    throw error;
   }
 }

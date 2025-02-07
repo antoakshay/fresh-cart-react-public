@@ -5,11 +5,11 @@ function CartBill({ totalCartPrice, soldOut }) {
   const navigate = useNavigate();
   return (
     <>
-      <footer className="mt-6 flex items-center justify-between rounded-lg border-gray-100 bg-gray-200 p-6">
+      <footer className="mt-6 flex items-center justify-between rounded-lg border-gray-100 bg-gray p-6">
         {totalCartPrice !== 0 ? (
           <>
-            <span className="text-lg font-semibold text-gray-800">Total:</span>
-            <span className="text-2xl font-bold text-green-600">
+            <span className="text-lg font-semibold text-white">Total:</span>
+            <span className="text-2xl font-bold text-green-400">
               {totalCartPrice}$
             </span>
           </>
