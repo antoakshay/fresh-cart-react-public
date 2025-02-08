@@ -1,20 +1,50 @@
-import { useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { trackOrderCurrent } from '../../services/apiTrackOrder';
+import { useSearchContext } from '../../SearchContextApi';
+import Spinner from '../../ui/Spinner';
 
 function UserPage() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const email = useSelector((state) => state.user.email);
   const name = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+  const { trackOrder, setTrackOrder } = useSearchContext();
+  const [loading, setLoading] = useState(false);
 
-  function handleClick(event) {
+  const mutation = useMutation({
+    mutationFn: async (orderId) => {
+      return await trackOrderCurrent(orderId);
+    },
+    onSuccess: async (data) => {
+      // console.log('Success', data);
+      console.log(data.data);
+      setTrackOrder(data.data);
+      navigate('/trackOrder');
+    },
+    onError: (error) => {
+      alert('Something went wrong');
+      //   navigate('/');
+      //   console.log('Error', error);
+    },
+  });
+
+  async function handleClick(event) {
     event.preventDefault();
     const form = event.target;
     const orderId = form.orderNumber.value;
     console.log(orderId);
-    // if(orderId.length !== 6) return alert('Enter the 6 char order number properly')
-    navigate(`/orderHistory/orderId/${orderId}`);
+    if (orderId.length < 4) return alert('Enter the  order number properly');
+    try {
+      setLoading(true);
+      const response = await mutation.mutateAsync(orderId);
+    } catch (e) {
+      alert('Failed to fetch data');
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -27,7 +57,9 @@ function UserPage() {
     return null;
   }
 
-  
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
@@ -70,7 +102,7 @@ function UserPage() {
               <input
                 name="orderNumber"
                 type="text"
-                className="block w-full bg-gray-600 text-white rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 bg-gray-600 p-3 text-sm text-gray-900 text-white focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Enter your order number"
                 required
               />

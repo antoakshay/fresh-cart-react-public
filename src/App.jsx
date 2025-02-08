@@ -33,6 +33,7 @@ import UserSetPassword from './features/User/UserSetPassword';
 import OrderHistory from './features/Order/OrderHistory';
 import IndividualOrder from './features/Order/IndividualOrder';
 import OrderError from './features/Order/OrderError';
+import TrackOrderDetails from './features/Order/TrackOrderDetails';
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: '/orderHistory/sort/:sortNumber',
         element: <OrderHistory />,
+      },
+      {
+        path: '/trackOrder',
+        element: <TrackOrderDetails/>
       },
       {
         path: '/orderHistory/orderId/:orderId',

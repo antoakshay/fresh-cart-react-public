@@ -44,28 +44,11 @@ function IndividualOrder() {
   const { products } = orderDetails;
 
   useEffect(() => {
-    if (!orderDetails) {
-      navigate('/userPage');
-      alert('Something went wrong');
-    }
-  }, [navigate, orderDetails]);
-
-  useEffect(() => {
     if (!isAuthenticated) {
       navigate('/', { replace: true });
       return;
     }
   }, [isAuthenticated, navigate]);
-
-  if (!products || products.length === 0) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-start py-6">
-        <p className="text-lg text-red-500">
-          No order stack found with that orderId: {orderId}
-        </p>
-      </div>
-    );
-  }
 
   if (loading) {
     return <Spinner />;
@@ -133,7 +116,7 @@ function IndividualOrder() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {products.map((item, index) => (
+            {products?.map((item, index) => (
               <tr key={index}>
                 <td className="whitespace-nowrap px-6 py-4">
                   {item.product?.name || 'N/A'}

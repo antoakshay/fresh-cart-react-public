@@ -5,7 +5,7 @@ const SearchContext = createContext();
 export const useSearchContext = () => useContext(SearchContext);
 
 export function SearchContextProvider({ children }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   // !! Setting the signUp Auth state in memory localstorage
   const [signUpAuth, setSignUpAuth] = useState(() => {
@@ -31,6 +31,8 @@ export function SearchContextProvider({ children }) {
   }, [resetPassAuth]);
 
   const [updateQtyLoading, setUpdateQtyLoading] = useState({});
+
+  const [trackOrder, setTrackOrder] = useState([]);
   return (
     <SearchContext.Provider
       value={{
@@ -46,6 +48,8 @@ export function SearchContextProvider({ children }) {
         setResetPassAuth,
         updateQtyLoading,
         setUpdateQtyLoading,
+        trackOrder,
+        setTrackOrder
       }}
     >
       {children}

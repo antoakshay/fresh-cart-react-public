@@ -14,7 +14,7 @@ function Searchbar() {
 
   async function handleSearch(event) {
     event.preventDefault();
-    if (!query) return alert('Do I look like a mind reader? TYPE SOMETHING!');
+    if (!query) return alert('Please enter a query!');
     if (query.length < 3) return alert('Please input more than 3 characters');
 
     // const response = await findProducts(query);

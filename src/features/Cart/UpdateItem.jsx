@@ -57,35 +57,34 @@ function UpdateItem({ id, currentQuantity }) {
     }
   }
 
- return (
-   <div className="flex items-center gap-1 md:gap-2">
-     {loading ? (
-       <Loader />
-     ) : (
-       <>
-         <Button
-           type="round"
-           className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
-           onClick={(event) => handleClick(id)}
-         >
-           -
-         </Button>
-         <input
-           defaultValue={currentQuantity}
-           className="h-8 w-10 rounded-md border border-gray-600 bg-gray-800 text-center text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
-         />
-         <Button
-           type="round"
-           className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
-           onClick={() => handleClick2(id)}
-         >
-           +
-         </Button>
-       </>
-     )}
-   </div>
- );
-
+  return (
+    <div className="flex items-center gap-1 md:gap-2">
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Button
+            type="round"
+            className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+            onClick={(event) => handleClick(id)}
+          >
+            -
+          </Button>
+          <input
+            defaultValue={currentQuantity}
+            className="h-8 w-10 rounded-md border border-gray-600 bg-gray-800 text-center text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <Button
+            type="round"
+            className="h-8 w-8 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+            onClick={() => handleClick2(id)}
+          >
+            +
+          </Button>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default UpdateItem;
