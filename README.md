@@ -1,8 +1,15 @@
-# React + Vite
+# FreshCart React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To use this frontend app, you need to have downloaded the FreshCart Express server in order to work.
 
-Currently, two official plugins are available:
+The installation is pretty much simple — just run:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+npm install
+
+to install the npm packages, and that’s it.
+
+-------------------------------------------------------------------------------------------------------------
+
+Modify the apiUrl.js to the port address where the FreshCart Express server is hosted.
+
+I have already configured React to generate self-signed certificates for the HTTPS server automatically whenever the IP address of the current host changes, so you don’t have to do it manually.
